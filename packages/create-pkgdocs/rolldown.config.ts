@@ -1,6 +1,6 @@
 import { defineConfig } from "rolldown"
+import { dts } from "rolldown-plugin-dts"
 import del from "rollup-plugin-delete"
-import { dts } from 'rolldown-plugin-dts'
 
 export default defineConfig({
   checks: {

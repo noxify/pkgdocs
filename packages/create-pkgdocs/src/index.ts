@@ -20,8 +20,6 @@ interface NpmPackageData {
   version: string
 }
 
-
-
 async function getLatestVersion(packageName: string): Promise<string> {
   try {
     const response = await fetch(`https://registry.npmjs.org/${packageName}/latest`)
@@ -34,8 +32,6 @@ async function getLatestVersion(packageName: string): Promise<string> {
     return "*"
   }
 }
-
-
 
 async function _updatePackageJson(targetDir: string, projectName: string): Promise<void> {
   const s = spinner()
@@ -56,9 +52,7 @@ async function _updatePackageJson(targetDir: string, projectName: string): Promi
     }
 
     // Get latest versions
-    const [coreVersion] = await Promise.all([
-      getLatestVersion("@pkgdocs/core"),
-    ])
+    const [coreVersion] = await Promise.all([getLatestVersion("@pkgdocs/core")])
 
     // Replace workspace dependencies
     if (updatedPackageJson.dependencies) {
@@ -186,7 +180,6 @@ async function main() {
   mkdirSync(targetDir, { recursive: true })
 
   try {
-
     // // Update package.json
     // await updatePackageJson(targetDir, projectName)
 
@@ -224,9 +217,7 @@ async function main() {
       console.log(pc.cyan(`  ${packageManager} run dev`))
       console.log()
       console.log("Learn more:")
-      console.log(
-        `  ${terminalLink("Documentation", "https://pkgdocs.dev")}`,
-      ) 
+      console.log(`  ${terminalLink("Documentation", "https://pkgdocs.dev")}`)
     }
   } catch (error) {
     if (!quietMode) {

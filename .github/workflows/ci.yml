@@ -37,8 +37,8 @@ jobs:
       - name: Setup
         uses: ./.github/setup
 
-      - name: Generate next routes
-        run: pnpm -F docs typegen
+      - name: Generate next types
+        run: pnpm -F @pkgdocs/site typegen
 
       - name: Lint
         run: pnpm lint
@@ -62,8 +62,8 @@ jobs:
       - name: Setup
         uses: ./.github/setup
 
-      - name: Generate next routes
-        run: pnpm -F docs typegen
+      - name: Generate next types
+        run: pnpm -F @pkgdocs/site typegen
 
       - name: Typecheck
         run: pnpm typecheck

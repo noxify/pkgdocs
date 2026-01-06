@@ -9,7 +9,7 @@ import { fileURLToPath } from "url"
 const config = {
   plugins: ["@ianvs/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
   tailwindStylesheet: fileURLToPath(
-    new URL("../../apps/docs/src/app/globals.css", import.meta.url),
+    new URL("../../apps/site/src/app/globals.css", import.meta.url),
   ),
   tailwindFunctions: ["cn", "cva"],
 

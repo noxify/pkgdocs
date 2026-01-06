@@ -1,8 +1,3 @@
 export default function Page() {
-  
-  return (
-    <>
-      tbd
-    </>
-  )
+  return <>tbd</>
 }

@@ -1,4 +1,3 @@
-
 export interface TestInterface {
   foo: string
   bar: number
