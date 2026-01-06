@@ -1,0 +1,61 @@
+{
+  "name": "create-pkgdocs",
+  "version": "0.0.0",
+  "description": "Create pkgdocs with one command",
+  "keywords": [
+    "pkgdocs",
+    "documentation",
+    "docs",
+    "cli",
+    "create"
+  ],
+  "homepage": "https://pkgdocs.dev",
+  "bugs": "https://github.com/noxify/pkgdocs/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/noxify/pkgdocs.git",
+    "directory": "packages/create-pkgdocs"
+  },
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "create-pkgdocs": "dist/index.js"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "scripts": {
+    "build": "rolldown -c rolldown.config.ts",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "clean:cache": "git clean -xdf .cache",
+    "dev": "tsx src/index.ts",
+    "format": "prettier --check . --ignore-path ../../.gitignore --ignore-path ../../.prettierignore",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "prettier": "@pkgdocs/prettier-config",
+  "dependencies": {
+    "@antfu/install-pkg": "1.1.0",
+    "@clack/prompts": "0.11.0",
+    "giget": "2.0.0",
+    "picocolors": "1.1.1",
+    "read-pkg": "10.0.0",
+    "terminal-link": "5.0.0"
+  },
+  "devDependencies": {
+    "@pkgdocs/eslint-config": "workspace:*",
+    "@pkgdocs/prettier-config": "workspace:*",
+    "@pkgdocs/tsconfig": "workspace:*",
+    "@types/node": "24.10.4",
+    "eslint": "9.39.2",
+    "prettier": "3.7.4",
+    "rolldown": "1.0.0-beta.58",
+    "rolldown-plugin-dts": "0.20.0",
+    "rollup-plugin-delete": "3.0.2",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
