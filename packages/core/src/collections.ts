@@ -1,39 +1,67 @@
 import { isDirectory, isFile } from "renoun/file-system"
 
 import type { EntryType, Frontmatter, SourceCollection, TransformedEntry } from "./types"
-import { optionalCache } from "./cache"
+import { cacheWithKey } from "./cache"
 import { flattenEntries, getTitle, isHidden, removeFromArray } from "./helpers"
 
 export type { EntryType } from "./types"
 
 /**
+ * Internal: stable object interning to build deterministic keys
+ * across the lifetime of the process for object instances.
+ */
+const internIds = new WeakMap<object, string>()
+let internSeq = 0
+function internObj(o: object): string {
+  let id = internIds.get(o)
+  if (!id) {
+    id = `o${++internSeq}`
+    internIds.set(o, id)
+  }
+  return id
+}
+
+/**
+ * Internal: key helper for SourceCollection.
+ * If SourceCollection has a natural id (e.g. sc.id), prefer that over interning.
+ */
+const keyOfSC = (sc: SourceCollection) => {
+  const key = `sc:${internObj(sc)}`
+  return key
+}
+
+/**
  * Caches and returns the root collections from the source collection.
- * Retrieves all top-level collections with their metadata including title, entrypoint, description and alias.
+ * Retrieves all top-level collections with their metadata including title, entrypoint,
+ * description and alias.
  *
  * @param sourceCollection - The source collection to retrieve root collections from
  * @returns Promise resolving to an array of root collection objects with metadata
  */
-export const rootCollections = optionalCache(async (sourceCollection: SourceCollection) => {
-  const rootCollections = await sourceCollection.getEntries({
-    recursive: false,
-    includeIndexAndReadmeFiles: true,
-  })
+export const rootCollections = cacheWithKey(
+  async (sourceCollection: SourceCollection) => {
+    const roots = await sourceCollection.getEntries({
+      recursive: false,
+      includeIndexAndReadmeFiles: true,
+    })
 
-  return await Promise.all(
-    rootCollections.filter(isDirectory).map(async (collection) => {
-      const indexFile = await collection.getFile("index", "mdx")
+    return await Promise.all(
+      roots.filter(isDirectory).map(async (collection) => {
+        const indexFile = await collection.getFile("index", "mdx")
+        const frontmatter = await getMetadata(indexFile)
 
-      const frontmatter = await getMetadata(indexFile)
-
-      return {
-        title: getTitle(indexFile, frontmatter, true),
-        entrypoint: frontmatter?.entrypoint ?? `/docs${collection.getPathname()}`,
-        description: frontmatter?.description ?? "",
-        alias: frontmatter?.alias ?? collection.getPathnameSegments()[1],
-      }
-    }),
-  )
-})
+        return {
+          title: getTitle(indexFile, frontmatter, true),
+          entrypoint: frontmatter?.entrypoint ?? `/docs${collection.getPathname()}`,
+          description: frontmatter?.description ?? "",
+          alias: frontmatter?.alias ?? collection.getPathnameSegments()[1],
+        }
+      }),
+    )
+  },
+  // Deterministic key across process: SourceCollection identity + tag
+  (sourceCollection) => `${keyOfSC(sourceCollection)}|rootCollections`,
+)
 
 /**
  * Caches and returns an array of transformed entries from the DocumentationGroup collection.
@@ -43,7 +71,7 @@ export const rootCollections = optionalCache(async (sourceCollection: SourceColl
  * @param group - Optional group name to filter collections by
  * @returns Promise resolving to an array of transformed entries
  */
-export const transformedEntries = optionalCache(
+export const transformedEntries = cacheWithKey(
   async (sourceCollection: SourceCollection, group?: string) => {
     let collections = await sourceCollection.getEntries({
       recursive: false,
@@ -66,6 +94,8 @@ export const transformedEntries = optionalCache(
 
     return entries
   },
+  // Key includes SourceCollection identity and group discriminator
+  (sourceCollection, group) => `${keyOfSC(sourceCollection)}|transformedEntries|g:${group ?? "-"}`,
 )
 
 /**
@@ -80,17 +110,17 @@ export async function getChildEntries(sourceCollection: SourceCollection, source
   if (source.depth > -1) {
     if (isDirectory(source)) {
       const parent = await (await getDirectory(sourceCollection, source)).getEntries()
-      return await Promise.all(parent.map(async (ele) => getEntry(sourceCollection, ele)))
+      return await Promise.all(parent.map((ele) => getEntry(sourceCollection, ele)))
     }
 
     if (isFile(source) && source.baseName === "index") {
       const parent = await (await getDirectory(sourceCollection, source.getParent())).getEntries()
-      return await Promise.all(parent.map(async (ele) => getEntry(sourceCollection, ele)))
+      return await Promise.all(parent.map((ele) => getEntry(sourceCollection, ele)))
     }
     return []
   } else {
     const parent = await (await getDirectory(sourceCollection, source)).getEntries()
-    return await Promise.all(parent.map(async (ele) => getEntry(sourceCollection, ele)))
+    return await Promise.all(parent.map((ele) => getEntry(sourceCollection, ele)))
   }
 }
 
@@ -109,11 +139,9 @@ export const getBreadcrumbItems = async (
   allEntries?: Awaited<ReturnType<typeof transformedEntries>>,
 ) => {
   const cleanedSlug = removeFromArray(slug, ["index"])
-
   const combinations = cleanedSlug.map((_, index) => cleanedSlug.slice(0, index + 1))
 
-  const items = []
-
+  const items: { title: string; path: string[] }[] = []
   const entries = allEntries ?? (await transformedEntries(sourceCollection, slug[0]))
 
   for (const currentPageSegement of combinations) {
@@ -140,7 +168,7 @@ export const getBreadcrumbItems = async (
  * @param source - The source entry to get the file content for
  * @returns Promise resolving to the file object or null if not found
  */
-export const getFileContent = optionalCache(
+export const getFileContent = cacheWithKey(
   async (sourceCollection: SourceCollection, source: EntryType) => {
     const segments = source.getPathnameSegments({
       includeBasePathname: true,
@@ -155,6 +183,9 @@ export const getFileContent = optionalCache(
 
     return segmentFile ?? indexFile ?? readmeFile ?? null
   },
+  // Key includes SourceCollection identity and the absolute pathname of the Entry
+  (sourceCollection, source) =>
+    `${keyOfSC(sourceCollection)}|getFileContent|p:${source.absolutePath}`,
 )
 
 /**
@@ -190,10 +221,13 @@ export async function getDirectory(
  * @param file - The file to extract metadata from, or null
  * @returns Promise resolving to the frontmatter object or undefined if not found
  */
-export const getMetadata = optionalCache(
+export const getMetadata = cacheWithKey(
   async (file: Awaited<ReturnType<typeof getFileContent>>) => {
     return ((await file?.getExportValue("frontmatter")) as Frontmatter | undefined) ?? undefined
   },
+  // Use a stable identifier for "file" argument:
+  // prefer file.path if available; otherwise fall back to interning
+  (file) => `getMetadata|f:${file ? file.absolutePath : "null"}`,
 )
 
 /**
@@ -219,7 +253,7 @@ export async function getSiblings(
   }
 
   const seenPaths = new Set<string>()
-  const uniqueEntries = []
+  const uniqueEntries: TransformedEntry[] = []
 
   for (const entry of visibleEntries) {
     if (seenPaths.has(entry.rawPathname)) {
@@ -250,11 +284,13 @@ export async function getSiblings(
  * @param transformedEntry - The transformed entry to get the file for
  * @returns Promise resolving to the file object or null if not found
  */
-export const getFileForEntry = optionalCache(
+export const getFileForEntry = cacheWithKey(
   async (sourceCollection: SourceCollection, transformedEntry: TransformedEntry) => {
     const entry = await getRawEntry(sourceCollection, transformedEntry)
     return await getFileContent(sourceCollection, entry)
   },
+  (sourceCollection, transformedEntry) =>
+    `${keyOfSC(sourceCollection)}|getFileForEntry|p:${transformedEntry.rawPathname}`,
 )
 
 /**
@@ -265,7 +301,7 @@ export const getFileForEntry = optionalCache(
  * @param source - The file system entry to transform
  * @returns Promise resolving to a transformed entry object
  */
-export const getEntry = optionalCache(
+export const getEntry = cacheWithKey(
   async (sourceCollection: SourceCollection, source: EntryType) => {
     const file = await getFileContent(sourceCollection, source)
 
@@ -285,6 +321,10 @@ export const getEntry = optionalCache(
       hasFile: file !== null,
     } as TransformedEntry
   },
+  (sourceCollection, source) =>
+    `${keyOfSC(sourceCollection)}|getEntry|p:${source.getPathname({
+      includeBasePathname: true,
+    })}`,
 )
 
 /**
@@ -295,10 +335,12 @@ export const getEntry = optionalCache(
  * @param transformedEntry - The transformed entry to get the raw entry for
  * @returns Promise resolving to the raw entry object
  */
-export const getRawEntry = optionalCache(
+export const getRawEntry = cacheWithKey(
   async (sourceCollection: SourceCollection, transformedEntry: TransformedEntry) => {
     return await sourceCollection.getEntry(transformedEntry.segments)
   },
+  (sourceCollection, transformedEntry) =>
+    `${keyOfSC(sourceCollection)}|getRawEntry|p:${transformedEntry.rawPathname}`,
 )
 
 /**

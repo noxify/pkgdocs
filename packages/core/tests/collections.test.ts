@@ -24,6 +24,7 @@ describe("collections tests", () => {
     it("should retrieve and transform root collections", async () => {
       const result = await rootCollections(sourceCollection)
 
+      console.dir({ result })
       expect(result).toBeInstanceOf(Array)
       expect(result.length).toBeGreaterThan(0)
 
@@ -43,7 +44,7 @@ describe("collections tests", () => {
 
   describe("transformedEntries", () => {
     it("should transform all entries from source collection", async () => {
-      const result = await transformedEntries(sourceCollection)
+      const result = await transformedEntries(sourceCollection, "getting-started")
 
       expect(Array.isArray(result)).toBe(true)
       expect(result.length).toBeGreaterThan(0)
@@ -57,7 +58,7 @@ describe("collections tests", () => {
     })
 
     it("should filter entries by group when provided", async () => {
-      const allEntries = await transformedEntries(sourceCollection)
+      const allEntries = await rootCollections(sourceCollection)
       const filteredEntries = await transformedEntries(sourceCollection, "api")
 
       expect(filteredEntries.length).toBeLessThanOrEqual(allEntries.length)
@@ -181,7 +182,7 @@ describe("collections tests", () => {
 
   describe("getSiblings", () => {
     it("should return previous and next entries", async () => {
-      const allEntries = await transformedEntries(sourceCollection)
+      const allEntries = await transformedEntries(sourceCollection, "getting-started")
       const middleEntry = allEntries.find((e) => e.baseName === "installation")
 
       expect(middleEntry).toBeDefined()
@@ -209,7 +210,7 @@ describe("collections tests", () => {
     })
 
     it("should handle first entry with only next sibling", async () => {
-      const allEntries = await transformedEntries(sourceCollection)
+      const allEntries = await transformedEntries(sourceCollection, "getting-started")
       const firstEntry = allEntries.find((e) => e.baseName === "getting-started")
 
       expect(firstEntry).toBeDefined()
@@ -235,7 +236,7 @@ describe("collections tests", () => {
 
   describe("isExternal", () => {
     it("should return true for entries with externalLink", async () => {
-      const allEntries = await transformedEntries(sourceCollection)
+      const allEntries = await transformedEntries(sourceCollection, "getting-started")
       const externalEntry = allEntries.find((e) => e.pathname.includes("external"))
 
       if (externalEntry) {
@@ -245,7 +246,7 @@ describe("collections tests", () => {
     })
 
     it("should return false for regular entries", async () => {
-      const allEntries = await transformedEntries(sourceCollection)
+      const allEntries = await transformedEntries(sourceCollection, "getting-started")
       const regularEntry = allEntries.find((e) => e.baseName === "installation")
 
       if (regularEntry) {
@@ -257,7 +258,7 @@ describe("collections tests", () => {
 
   describe("getRawEntry", () => {
     it("should retrieve raw entry from transformed entry", async () => {
-      const allEntries = await transformedEntries(sourceCollection)
+      const allEntries = await transformedEntries(sourceCollection, "getting-started")
       const transformedEntry = allEntries[0]
 
       if (transformedEntry) {
@@ -270,7 +271,7 @@ describe("collections tests", () => {
 
   describe("getFileForEntry", () => {
     it("should get file for transformed entry", async () => {
-      const allEntries = await transformedEntries(sourceCollection)
+      const allEntries = await transformedEntries(sourceCollection, "getting-started")
       const entry = allEntries.find((e) => e.hasFile)
 
       if (entry) {
