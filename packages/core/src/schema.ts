@@ -24,8 +24,6 @@ export const frontmatterSchema = z.object({
    * If not specified, the collection path will be used (e.g., `/docs/<collection-name>`)
    */
   entrypoint: z.string().optional(),
-  /** Specifies an alias for the collection */
-  alias: z.string().optional(),
   /** Should the table of contents be displayed. Defaults to true */
   toc: z.boolean().optional().default(true),
   /** Specifies the current page as an external link */
@@ -33,21 +31,6 @@ export const frontmatterSchema = z.object({
   /** Should the current page be hidden from the section grid. Defaults to false */
   hideFromSectionGrid: z.boolean().optional().default(false),
 })
-
-/**
- * Zod schema for page heading validation.
- * Defines the structure for extracted headings with level, text, and id.
- */
-export const headingSchema = z.array(
-  z.object({
-    /** The heading level (1-6) */
-    level: z.number(),
-    /** The heading text content */
-    text: z.string(),
-    /** The unique identifier for the heading */
-    id: z.string(),
-  }),
-)
 
 /**
  * Combined schema for documentation pages.

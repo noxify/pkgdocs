@@ -33,7 +33,7 @@ const keyOfSC = (sc: SourceCollection) => {
 /**
  * Caches and returns the root collections from the source collection.
  * Retrieves all top-level collections with their metadata including title, entrypoint,
- * description and alias.
+ * description and group.
  *
  * @param sourceCollection - The source collection to retrieve root collections from
  * @returns Promise resolving to an array of root collection objects with metadata
@@ -52,9 +52,10 @@ export const rootCollections = cacheWithKey(
 
         return {
           title: getTitle(indexFile, frontmatter, true),
-          entrypoint: frontmatter?.entrypoint ?? `/docs${collection.getPathname()}`,
+          entrypoint:
+            frontmatter?.entrypoint ?? `${collection.getPathname({ includeBasePathname: true })}`,
           description: frontmatter?.description ?? "",
-          alias: frontmatter?.alias ?? collection.getPathnameSegments()[1],
+          group: collection.baseName,
         }
       }),
     )
@@ -79,7 +80,9 @@ export const transformedEntries = cacheWithKey(
     })
 
     if (group) {
-      collections = collections.filter((ele) => ele.getPathnameSegments()[0] === group)
+      collections = collections.filter((ele) => {
+        return ele.baseName === group
+      })
     }
 
     // Flatten all entries from all collections
@@ -145,7 +148,7 @@ export const getBreadcrumbItems = async (
   const entries = allEntries ?? (await transformedEntries(sourceCollection, slug[0]))
 
   for (const currentPageSegement of combinations) {
-    const entry = entries.find((ele) => ele.rawPathname === `/${currentPageSegement.join("/")}`)
+    const entry = entries.find((ele) => ele.fullPathname === `/${currentPageSegement.join("/")}`)
 
     if (!entry) {
       continue
@@ -205,13 +208,7 @@ export async function getDirectory(
     includeDirectoryNamedSegment: true,
   })
 
-  const excludeSegments = segments[1] === "examples" ? ["docs"] : []
-
-  const currentDirectory = await sourceCollection.getDirectory(
-    removeFromArray(segments, excludeSegments),
-  )
-
-  return currentDirectory
+  return sourceCollection.getDirectory(segments)
 }
 
 /**
@@ -242,7 +239,7 @@ export async function getSiblings(
   sourceCollection: SourceCollection,
   source: TransformedEntry,
 ): Promise<[TransformedEntry | undefined, TransformedEntry | undefined]> {
-  const allEntries = await transformedEntries(sourceCollection, source.segments[0])
+  const allEntries = await transformedEntries(sourceCollection, source.group)
 
   const visibleEntries = []
   for (const entry of allEntries) {
@@ -256,14 +253,14 @@ export async function getSiblings(
   const uniqueEntries: TransformedEntry[] = []
 
   for (const entry of visibleEntries) {
-    if (seenPaths.has(entry.rawPathname)) {
+    if (seenPaths.has(entry.fullPathname)) {
       continue
     }
-    seenPaths.add(entry.rawPathname)
+    seenPaths.add(entry.fullPathname)
     uniqueEntries.push(entry)
   }
 
-  const currentIndex = uniqueEntries.findIndex((e) => e.rawPathname === source.rawPathname)
+  const currentIndex = uniqueEntries.findIndex((e) => e.fullPathname === source.fullPathname)
 
   if (currentIndex === -1) {
     return [undefined, undefined]
@@ -290,7 +287,7 @@ export const getFileForEntry = cacheWithKey(
     return await getFileContent(sourceCollection, entry)
   },
   (sourceCollection, transformedEntry) =>
-    `${keyOfSC(sourceCollection)}|getFileForEntry|p:${transformedEntry.rawPathname}`,
+    `${keyOfSC(sourceCollection)}|getFileForEntry|p:${transformedEntry.fullPathname}`,
 )
 
 /**
@@ -307,9 +304,16 @@ export const getEntry = cacheWithKey(
 
     const metadata = file ? await getMetadata(file) : null
 
+    // Determine group by traversing to root collection (depth === -1)
+    let current = source
+    while (current.depth > -1) {
+      current = current.getParent()
+    }
+    const group = current.baseName
+
     return {
-      rawPathname: source.getPathname({ includeBasePathname: true }),
-      pathname: source.getPathname({ includeBasePathname: false }),
+      fullPathname: source.getPathname({ includeBasePathname: true }),
+      relativePathname: source.getPathname({ includeBasePathname: false }),
       segments: source.getPathnameSegments({ includeBasePathname: true }),
       title: metadata ? getTitle(source, metadata, true) : getTitle(source, undefined, true),
       path: source.absolutePath,
@@ -317,8 +321,8 @@ export const getEntry = cacheWithKey(
       sortOrder: file?.order ?? 0,
       depth: source.depth,
       baseName: source.baseName,
-      siblings: (await source.getSiblings()).map((ele) => ele?.getPathname() ?? null),
       hasFile: file !== null,
+      group,
     } as TransformedEntry
   },
   (sourceCollection, source) =>
@@ -340,7 +344,7 @@ export const getRawEntry = cacheWithKey(
     return await sourceCollection.getEntry(transformedEntry.segments)
   },
   (sourceCollection, transformedEntry) =>
-    `${keyOfSC(sourceCollection)}|getRawEntry|p:${transformedEntry.rawPathname}`,
+    `${keyOfSC(sourceCollection)}|getRawEntry|p:${transformedEntry.fullPathname}`,
 )
 
 /**

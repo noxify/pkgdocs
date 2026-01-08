@@ -144,17 +144,17 @@ describe("rawIsHidden", () => {
 describe("isHidden", () => {
   it("should return true when last segment starts with underscore", () => {
     const entry: TransformedEntry = {
-      segments: ["docs", "api", "_private"],
-      rawPathname: "/docs/api/_private",
-      pathname: "docs/api/_private",
+      segments: ["api", "_private"],
+      fullPathname: "api/_private",
+      relativePathname: "_private",
       title: "Private",
       path: "/path/to/file",
       isDirectory: true,
       sortOrder: 0,
       depth: 2,
       baseName: "_private",
-      siblings: [],
       hasFile: false,
+      group: "api",
     }
 
     expect(isHidden(entry)).toBe(true)
@@ -163,16 +163,16 @@ describe("isHidden", () => {
   it("should return false when last segment does not start with underscore", () => {
     const entry: TransformedEntry = {
       segments: ["docs", "api", "public"],
-      rawPathname: "/docs/api/public",
-      pathname: "docs/api/public",
+      fullPathname: "/docs/api/public",
+      relativePathname: "docs/api/public",
       title: "Public",
       path: "/path/to/file",
       isDirectory: true,
       sortOrder: 0,
       depth: 2,
       baseName: "public",
-      siblings: [],
       hasFile: false,
+      group: "docs",
     }
 
     expect(isHidden(entry)).toBe(false)
@@ -181,16 +181,16 @@ describe("isHidden", () => {
   it("should return false for entry with empty segments", () => {
     const entry: TransformedEntry = {
       segments: [],
-      rawPathname: "/",
-      pathname: "",
+      fullPathname: "/",
+      relativePathname: "",
       title: "Root",
       path: "/path/to/file",
       isDirectory: true,
       sortOrder: 0,
       depth: 0,
       baseName: "root",
-      siblings: [],
       hasFile: false,
+      group: "root",
     }
 
     expect(isHidden(entry)).toBe(false)

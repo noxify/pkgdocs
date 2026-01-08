@@ -78,7 +78,7 @@ export function generateDirectories(): DirectoryType[] {
         baseUrl: "https://github.com",
         owner: "noxify",
         repository: "pkgdocs",
-        path: `docs/${source}`,
+        path: `content/${source}`,
       },
       // hide hidden files ( starts with `_` ) and all asset directories ( `_assets` )
       // exclude also files which starts with a dot ( `.` ), which is needed for our datasources content

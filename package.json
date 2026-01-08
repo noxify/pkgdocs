@@ -47,5 +47,10 @@
     "vite-tsconfig-paths": "6.0.3",
     "vitest": "4.0.16"
   },
-  "prettier": "@pkgdocs/prettier-config"
+  "prettier": "@pkgdocs/prettier-config",
+  "pnpm": {
+    "overrides": {
+      "@modelcontextprotocol/sdk@<1.25.2": ">=1.25.2"
+    }
+  }
 }

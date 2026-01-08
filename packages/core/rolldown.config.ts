@@ -14,5 +14,6 @@ export default defineConfig({
     format: "esm",
     entryFileNames: "[name].js",
   },
+  external: ["renoun", "renoun/file-system", "zod", "react"],
   plugins: [del({ targets: "dist/*" }), dts()],
 })

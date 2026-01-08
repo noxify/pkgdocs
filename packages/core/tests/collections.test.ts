@@ -24,11 +24,10 @@ describe("collections tests", () => {
     it("should retrieve and transform root collections", async () => {
       const result = await rootCollections(sourceCollection)
 
-      console.dir({ result })
       expect(result).toBeInstanceOf(Array)
       expect(result.length).toBeGreaterThan(0)
 
-      const apiCollection = result.find((c) => c.alias === "api")
+      const apiCollection = result.find((c) => c.group === "api")
       expect(apiCollection).toBeDefined()
       expect(apiCollection?.title).toBe("API Reference")
       expect(apiCollection?.entrypoint).toBe("/docs/api/overview")
@@ -38,7 +37,7 @@ describe("collections tests", () => {
       const result = await rootCollections(sourceCollection)
 
       const gettingStarted = result.find((c) => c.title === "Getting Started")
-      expect(gettingStarted?.entrypoint).toMatch("/docs/getting-started")
+      expect(gettingStarted?.entrypoint).toMatch("/getting-started")
     })
   })
 
@@ -50,8 +49,8 @@ describe("collections tests", () => {
       expect(result.length).toBeGreaterThan(0)
 
       const entry = result[0]
-      expect(entry).toHaveProperty("rawPathname")
-      expect(entry).toHaveProperty("pathname")
+      expect(entry).toHaveProperty("fullPathname")
+      expect(entry).toHaveProperty("relativePathname")
       expect(entry).toHaveProperty("segments")
       expect(entry).toHaveProperty("title")
       expect(entry).toHaveProperty("isDirectory")
@@ -116,8 +115,8 @@ describe("collections tests", () => {
       if (rawEntry) {
         const entry = await getEntry(sourceCollection, rawEntry)
 
-        expect(entry).toHaveProperty("rawPathname")
-        expect(entry).toHaveProperty("pathname")
+        expect(entry).toHaveProperty("fullPathname")
+        expect(entry).toHaveProperty("relativePathname")
         expect(entry).toHaveProperty("segments")
         expect(entry).toHaveProperty("title")
         expect(entry).toHaveProperty("path")
@@ -125,8 +124,8 @@ describe("collections tests", () => {
         expect(entry).toHaveProperty("sortOrder")
         expect(entry).toHaveProperty("depth")
         expect(entry).toHaveProperty("baseName")
-        expect(entry).toHaveProperty("siblings")
         expect(entry).toHaveProperty("hasFile")
+        expect(entry).toHaveProperty("group")
       }
     })
   })
@@ -173,7 +172,7 @@ describe("collections tests", () => {
         // Verify child structure
         children.forEach((child) => {
           expect(child).toHaveProperty("title")
-          expect(child).toHaveProperty("pathname")
+          expect(child).toHaveProperty("relativePathname")
           expect(child).toHaveProperty("baseName")
         })
       }
@@ -237,7 +236,7 @@ describe("collections tests", () => {
   describe("isExternal", () => {
     it("should return true for entries with externalLink", async () => {
       const allEntries = await transformedEntries(sourceCollection, "getting-started")
-      const externalEntry = allEntries.find((e) => e.pathname.includes("external"))
+      const externalEntry = allEntries.find((e) => e.relativePathname.includes("external"))
 
       if (externalEntry) {
         const result = await isExternal(sourceCollection, externalEntry)

@@ -1,14 +1,10 @@
-// Types
 export type { EntryType, DirectoryType, Frontmatter, TransformedEntry } from "./types"
 
-// Schemas
-export { frontmatterSchema, headingSchema, docSchema } from "./schema"
+export { frontmatterSchema, docSchema } from "./schema"
 export type { DocSchema } from "./schema"
 
-// Cache utilities
 export { optionalCache } from "./cache"
 
-// Helpers
 export {
   getTitle,
   flattenEntries,
@@ -18,7 +14,6 @@ export {
   directoryFilter,
 } from "./helpers"
 
-// Collections
 export {
   rootCollections,
   transformedEntries,
