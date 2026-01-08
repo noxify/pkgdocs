@@ -9,13 +9,6 @@ import pc from "picocolors"
 import { readPackage } from "read-pkg"
 import terminalLink from "terminal-link"
 
-// interface Template {
-//   name: string
-//   alias: string
-//   description: string
-//   path: string
-// }
-
 interface NpmPackageData {
   version: string
 }

@@ -11,7 +11,6 @@ describe("frontmatterSchema", () => {
       tags: ["test", "docs"],
       navTitle: "Test Nav",
       entrypoint: "/docs/test",
-      alias: "test-alias",
       toc: true,
       externalLink: "https://example.com",
       hideFromSectionGrid: false,

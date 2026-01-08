@@ -32,7 +32,6 @@ const fileSystem = new InMemoryFileSystem({
     title: API Reference
     description: API documentation
     entrypoint: /docs/api/overview
-    alias: api
     ---
 
     # API Reference

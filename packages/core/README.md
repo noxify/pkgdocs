@@ -209,7 +209,7 @@ interface Frontmatter {
   title?: string
   navTitle?: string
   description?: string
-  alias?: string
+  group?: string
   entrypoint?: string
   externalLink?: string
 }
