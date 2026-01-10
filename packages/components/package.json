@@ -1,0 +1,67 @@
+{
+  "name": "@pkgdocs/components",
+  "version": "0.0.0",
+  "description": "Shared components package for pkgdocs",
+  "keywords": [
+    "pkgdocs",
+    "documentation",
+    "docs",
+    "generator"
+  ],
+  "homepage": "https://pkgdocs.dev",
+  "bugs": "https://github.com/noxify/pkgdocs/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/noxify/pkgdocs",
+    "directory": "packages/components"
+  },
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./src/index.ts"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "types"
+  ],
+  "scripts": {
+    "build": "rolldown -c rolldown.config.ts",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "clean:cache": "git clean -xdf .cache",
+    "dev": "rolldown -c rolldown.config.ts --watch",
+    "format": "prettier --check . --ignore-path ../../.gitignore --ignore-path ../../.prettierignore",
+    "lint": "eslint .",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "prettier": "@pkgdocs/prettier-config",
+  "devDependencies": {
+    "@pkgdocs/eslint-config": "workspace:*",
+    "@pkgdocs/prettier-config": "workspace:*",
+    "@pkgdocs/tsconfig": "workspace:*",
+    "@types/node": "24.10.4",
+    "@vitejs/plugin-react": "^5.1.2",
+    "dedent": "1.7.1",
+    "eslint": "9.39.2",
+    "memfs": "^4.51.1",
+    "react": "19.2.3",
+    "renoun": "11.1.0",
+    "rolldown": "1.0.0-beta.59",
+    "rolldown-plugin-dts": "0.20.0",
+    "rollup-plugin-delete": "3.0.2",
+    "typescript": "5.9.3",
+    "vitest": "4.0.16",
+    "zod": "^4.3.5"
+  },
+  "peerDependencies": {
+    "react": "^19.2",
+    "renoun": "11.0.0",
+    "zod": "^4"
+  }
+}

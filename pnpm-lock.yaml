@@ -127,6 +127,57 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
 
+  packages/components:
+    devDependencies:
+      '@pkgdocs/eslint-config':
+        specifier: workspace:*
+        version: link:../../tooling/eslint
+      '@pkgdocs/prettier-config':
+        specifier: workspace:*
+        version: link:../../tooling/prettier
+      '@pkgdocs/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
+      '@types/node':
+        specifier: 24.10.4
+        version: 24.10.4
+      '@vitejs/plugin-react':
+        specifier: ^5.1.2
+        version: 5.1.2(vite@7.3.0(@types/node@24.10.4)(jiti@2.6.1)(lightningcss@1.30.2)(tsx@4.21.0))
+      dedent:
+        specifier: 1.7.1
+        version: 1.7.1
+      eslint:
+        specifier: 9.39.2
+        version: 9.39.2(jiti@2.6.1)
+      memfs:
+        specifier: ^4.51.1
+        version: 4.51.1
+      react:
+        specifier: 19.2.3
+        version: 19.2.3
+      renoun:
+        specifier: 11.1.0
+        version: 11.1.0(prettier@3.7.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      rolldown:
+        specifier: 1.0.0-beta.59
+        version: 1.0.0-beta.59
+      rolldown-plugin-dts:
+        specifier: 0.20.0
+        version: 0.20.0(rolldown@1.0.0-beta.59)(typescript@5.9.3)
+      rollup-plugin-delete:
+        specifier: 3.0.2
+        version: 3.0.2(rollup@4.55.1)
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+      vitest:
+        specifier: 4.0.16
+        version: 4.0.16(@types/node@24.10.4)(@vitest/ui@4.0.16)(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.30.2)(msw@2.12.7(@types/node@24.10.4)(typescript@5.9.3))(tsx@4.21.0)
+      zod:
+        specifier: ^4.3.5
+        version: 4.3.5
+
   packages/core:
     devDependencies:
       '@pkgdocs/eslint-config':
