@@ -68,6 +68,17 @@ jobs:
       - name: Typecheck
         run: pnpm typecheck
 
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./.github/setup
+
+      - name: Run pnpm audit
+        run: pnpm audit
+
   pkg-new-release:
     needs: [lint, format, typecheck]
     if: github.event_name == 'pull_request'
