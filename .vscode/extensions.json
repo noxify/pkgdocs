@@ -6,7 +6,6 @@
     "yoavbls.pretty-ts-errors",
     "vitest.explorer",
     "vercel.turbo-vsc",
-    "foxundermoon.shell-format",
     "bierner.comment-tagged-templates"
   ]
 }

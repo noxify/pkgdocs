@@ -31,7 +31,7 @@
     "types"
   ],
   "scripts": {
-    "build": "rolldown -c rolldown.config.ts",
+    "_build": "rolldown -c rolldown.config.ts",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "clean:cache": "git clean -xdf .cache",
     "dev": "rolldown -c rolldown.config.ts --watch",

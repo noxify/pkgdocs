@@ -46,7 +46,6 @@
     "@pkgdocs/prettier-config": "workspace:*",
     "@pkgdocs/tsconfig": "workspace:*",
     "@types/node": "24.10.4",
-    "@vitejs/plugin-react": "^5.1.2",
     "dedent": "1.7.1",
     "eslint": "9.39.2",
     "memfs": "^4.51.1",

@@ -17,7 +17,7 @@ const fileSystem = new InMemoryFileSystem({
 
     Welcome to the documentation.
   `,
-  [`content/getting-started/installation.mdx`]: dedent`
+  [`content/getting-started/01.installation.mdx`]: dedent`
     ---
     title: Installation
     description: How to install
@@ -26,6 +26,56 @@ const fileSystem = new InMemoryFileSystem({
     # Installation
 
     Install the package.
+  `,
+  [`content/getting-started/02.setup/index.mdx`]: dedent`
+    ---
+    title: Setup
+    description: Setup instructions
+    ---
+
+    # Setup
+
+    Get your environment set up for development.
+  `,
+  [`content/getting-started/02.setup/01.prerequisites.mdx`]: dedent`
+    ---
+    title: Prerequisites
+    description: Required tools and knowledge
+    ---
+
+    # Prerequisites
+
+    Before getting started, make sure you have the following installed.
+  `,
+  [`content/getting-started/02.setup/02.configuration.mdx`]: dedent`
+    ---
+    title: Configuration
+    description: How to configure
+    ---
+
+    # Configuration
+
+    Configure your project.
+  `,
+  [`content/getting-started/03.guides/01.first-steps.mdx`]: dedent`
+    ---
+    title: First Steps
+    description: Your first steps
+    ---
+
+    # First Steps
+
+    Take your first steps with our library.
+  `,
+  [`content/getting-started/03.guides/02.advanced-usage.mdx`]: dedent`
+    ---
+    title: Advanced Usage
+    description: Advanced patterns and techniques
+    ---
+
+    # Advanced Usage
+
+    Learn advanced patterns.
   `,
   [`content/api/index.mdx`]: dedent`
     ---

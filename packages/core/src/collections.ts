@@ -72,7 +72,7 @@ export const rootCollections = cacheWithKey(
  * @param group - Optional group name to filter collections by
  * @returns Promise resolving to an array of transformed entries
  */
-export const transformedEntries = cacheWithKey(
+const transformedEntriesBase = cacheWithKey(
   async (sourceCollection: SourceCollection, group?: string) => {
     let collections = await sourceCollection.getEntries({
       recursive: false,
@@ -100,6 +100,18 @@ export const transformedEntries = cacheWithKey(
   // Key includes SourceCollection identity and group discriminator
   (sourceCollection, group) => `${keyOfSC(sourceCollection)}|transformedEntries|g:${group ?? "-"}`,
 )
+
+export function transformedEntries(sourceCollection: SourceCollection): Promise<TransformedEntry[]>
+export function transformedEntries(
+  sourceCollection: SourceCollection,
+  group: string,
+): Promise<TransformedEntry[]>
+export function transformedEntries(
+  sourceCollection: SourceCollection,
+  group?: string,
+): Promise<TransformedEntry[]> {
+  return transformedEntriesBase(sourceCollection, group)
+}
 
 /**
  * Gets all child entries for the next level based on the current entry.
@@ -145,7 +157,7 @@ export const getBreadcrumbItems = async (
   const combinations = cleanedSlug.map((_, index) => cleanedSlug.slice(0, index + 1))
 
   const items: { title: string; path: string[] }[] = []
-  const entries = allEntries ?? (await transformedEntries(sourceCollection, slug[0]))
+  const entries = allEntries ?? (await transformedEntries(sourceCollection, slug[0] ?? ""))
 
   for (const currentPageSegement of combinations) {
     const entry = entries.find((ele) => ele.fullPathname === `/${currentPageSegement.join("/")}`)

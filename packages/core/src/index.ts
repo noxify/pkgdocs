@@ -28,3 +28,6 @@ export {
   getRawEntry,
   isExternal,
 } from "./collections"
+
+export type { TreeItem } from "./navigation"
+export { buildTree, getTree, getAllTrees } from "./navigation"

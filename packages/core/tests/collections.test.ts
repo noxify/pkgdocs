@@ -193,8 +193,9 @@ describe("collections tests", () => {
         expect(prev).toBeDefined()
         expect(prev?.baseName).toBe("getting-started")
 
-        // Installation should not have a next entry (external-link)
-        expect(next).toBeUndefined()
+        // Installation should have a next entry (setup)
+        expect(next).toBeDefined()
+        expect(next?.baseName).toBe("setup")
 
         // Verify sibling structure
         if (prev) {
