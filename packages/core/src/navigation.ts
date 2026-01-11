@@ -82,11 +82,11 @@ export function buildTree(entries: readonly TransformedEntry[]): TreeItem[] {
 }
 
 /**
- * Gets a tree structure for a specific documentation group.
+ * Gets a tree structure for a specific collection group.
  * Fetches all entries from the source collection for the given group and builds a hierarchical tree.
  *
  * @param sourceCollection - The source collection to retrieve entries from
- * @param group - The documentation group name (e.g., "getting-started", "api")
+ * @param group - The collection group name (e.g., "getting-started", "api")
  * @returns Promise resolving to an array of root tree items with nested children
  */
 export async function getTree(
@@ -98,7 +98,7 @@ export async function getTree(
 }
 
 /**
- * Gets the complete tree structure for all documentation groups.
+ * Gets the complete tree structure for all collection groups.
  * Builds separate tree hierarchies for each group in the source collection.
  *
  * @param sourceCollection - The source collection to retrieve entries from
