@@ -24,6 +24,9 @@
       "default": "./src/index.ts"
     }
   },
+  "imports": {
+    "#fixtures/*": "./fixtures/*"
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
