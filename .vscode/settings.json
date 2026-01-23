@@ -6,6 +6,8 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "prettier.enable": true,
   "editor.formatOnSave": true,
+  "editor.indentSize": 2,
+  "editor.useTabStops": false,
   "eslint.rules.customizations": [
     {
       "rule": "*",

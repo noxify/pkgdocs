@@ -1,0 +1,1 @@
+# @pkgdocs/mdx

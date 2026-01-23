@@ -1,7 +1,7 @@
 {
-  "name": "@pkgdocs/components",
+  "name": "@pkgdocs/mdx",
   "version": "0.0.0",
-  "description": "Shared components package for pkgdocs",
+  "description": "mdx package for pkgdocs",
   "keywords": [
     "pkgdocs",
     "documentation",
@@ -13,7 +13,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/noxify/pkgdocs",
-    "directory": "packages/components"
+    "directory": "packages/mdx"
   },
   "license": "MIT",
   "type": "module",
@@ -22,6 +22,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./src/index.ts"
+    },
+    "./nextjs": {
+      "types": "./dist/nextjs.d.ts",
+      "import": "./dist/nextjs.js",
+      "default": "./src/nextjs.ts"
     }
   },
   "main": "./dist/index.js",
@@ -31,40 +36,39 @@
     "types"
   ],
   "scripts": {
-    "_build": "rolldown -c rolldown.config.ts",
+    "build": "rolldown -c rolldown.config.ts",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "clean:cache": "git clean -xdf .cache",
     "dev": "rolldown -c rolldown.config.ts --watch",
     "format": "prettier --check . --ignore-path ../../.gitignore --ignore-path ../../.prettierignore",
     "lint": "eslint .",
-    "test": "vitest",
     "typecheck": "tsc --noEmit"
   },
   "prettier": "@pkgdocs/prettier-config",
   "dependencies": {
-    "zustand": "5.0.10"
+    "rehype-mdx-import-media": "1.2.0",
+    "remark-squeeze-paragraphs": "6.0.0",
+    "remark-strip-badges": "7.0.0"
   },
   "devDependencies": {
+    "@next/mdx": "16.1.4",
     "@pkgdocs/eslint-config": "workspace:*",
     "@pkgdocs/prettier-config": "workspace:*",
     "@pkgdocs/tsconfig": "workspace:*",
+    "@renoun/mdx": "3.8.0",
     "@types/node": "24.10.4",
-    "@vitejs/plugin-react": "^5.1.2",
-    "dedent": "1.7.1",
     "eslint": "9.39.2",
-    "memfs": "^4.56.10",
+    "next": "16.1.4",
     "react": "19.2.3",
     "renoun": "11.1.0",
     "rolldown": "1.0.0-rc.1",
     "rolldown-plugin-dts": "0.21.5",
     "rollup-plugin-delete": "3.0.2",
-    "typescript": "5.9.3",
-    "vitest": "4.0.18",
-    "zod": "^4.3.6"
+    "typescript": "5.9.3"
   },
   "peerDependencies": {
-    "react": "^19.2",
-    "renoun": "11.0.0",
-    "zod": "^4"
+    "@next/mdx": "16.1.4",
+    "next": "16.1.4",
+    "renoun": "11.0.0"
   }
 }
