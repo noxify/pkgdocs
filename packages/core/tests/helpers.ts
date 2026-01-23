@@ -1,5 +1,5 @@
 import { join } from "node:path"
-import { Collection as CollectionClass, Directory } from "renoun"
+import { Collection, Directory } from "renoun"
 
 import { directoryFilter } from "~/helpers"
 import { docSchema } from "~/schema"
@@ -8,7 +8,7 @@ const sources = ["getting-started", "api"]
 const contentRoot = join(process.cwd(), "packages/core")
 
 export function createSourceCollection() {
-  const collection = new CollectionClass({
+  const collection = new Collection({
     entries: generateDirectories(),
   })
 
