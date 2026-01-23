@@ -21,9 +21,6 @@ export function createDirectories() {
       schema: {
         mdx: docSchema,
       },
-      loader: {
-        mdx: (path) => import(`../content/${collection}/${path}.mdx`),
-      },
       filter: directoryFilter,
     })
   })
