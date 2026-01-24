@@ -1,6 +1,6 @@
 import createMDXPlugin from "@pkgdocs/mdx/nextjs"
 
-const withMDX = createMDXPlugin()
+const withMDX = createMDXPlugin({ options: { providerImportSource: "renoun/mdx/components" } })
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -22,7 +22,7 @@ const nextConfig = {
   experimental: {
     /**
      * In case you have a lot of pages and experience failing builds,
-     * you can enable these experimental features to reduce the amount of used CPUs
+     * you can enable these experimental feature to reduce the amount of used CPUs
      * this is helpful in CI environments with limited resources like GitHub Actions or Gitlab CI
      * by default Next.js uses all available CPUs which can lead to out-of-memory errors
      */
@@ -32,4 +32,6 @@ const nextConfig = {
   },
 }
 
-export default withMDX(nextConfig)
+const config = withMDX(nextConfig)
+
+export default config

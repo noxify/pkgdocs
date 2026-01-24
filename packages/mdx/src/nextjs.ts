@@ -24,15 +24,14 @@ export default function mdxPlugin(
   const defaultConfig: NextMDXOptions = {
     options: {
       remarkPlugins: [
-        // generates section headings based on heading levels
-        "@renoun/mdx/remark/add-sections",
-        "@renoun/mdx/remark/add-frontmatter",
         "remark-strip-badges",
         "@renoun/mdx/remark/transform-relative-links",
         "@renoun/mdx/remark/gfm",
         "@renoun/mdx/remark/transform-jsdoc-inline-tags",
         "@renoun/mdx/remark/remove-immediate-paragraphs",
         "remark-squeeze-paragraphs",
+        "@renoun/mdx/remark/add-frontmatter",
+        "@renoun/mdx/remark/add-sections",
       ],
       rehypePlugins: [
         "@renoun/mdx/rehype/add-code-block",

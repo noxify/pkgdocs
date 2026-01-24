@@ -68,6 +68,7 @@
   },
   "peerDependencies": {
     "@next/mdx": "16.1.4",
+    "@renoun/mdx": "3.8.0",
     "next": "16.1.4",
     "renoun": "11.0.0"
   }
