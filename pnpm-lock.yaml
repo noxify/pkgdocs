@@ -65,6 +65,9 @@ importers:
       react-dom:
         specifier: 19.2.3
         version: 19.2.3(react@19.2.3)
+      shadcn:
+        specifier: 3.7.0
+        version: 3.7.0(@types/node@24.10.4)(hono@4.11.5)(typescript@5.9.3)
       tw-animate-css:
         specifier: 1.4.0
         version: 1.4.0
@@ -173,10 +176,13 @@ importers:
         version: 19.2.3(react@19.2.3)
       renoun:
         specifier: 11.1.0
-        version: 11.1.0(prettier@3.8.1)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        version: 11.1.0(prettier@3.8.1)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(tm-themes@1.10.16)
       shadcn:
         specifier: 3.7.0
         version: 3.7.0(@types/node@24.10.4)(hono@4.11.5)(typescript@5.9.3)
+      tm-themes:
+        specifier: 1.10.16
+        version: 1.10.16
     devDependencies:
       '@ianvs/prettier-plugin-sort-imports':
         specifier: 4.7.0
@@ -274,7 +280,7 @@ importers:
         version: 19.2.3
       renoun:
         specifier: 11.1.0
-        version: 11.1.0(prettier@3.8.1)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        version: 11.1.0(prettier@3.8.1)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(tm-themes@1.10.16)
       rolldown:
         specifier: 1.0.0-rc.1
         version: 1.0.0-rc.1
@@ -322,7 +328,7 @@ importers:
         version: 19.2.3
       renoun:
         specifier: 11.1.0
-        version: 11.1.0(prettier@3.8.1)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        version: 11.1.0(prettier@3.8.1)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(tm-themes@1.10.16)
       rolldown:
         specifier: 1.0.0-rc.1
         version: 1.0.0-rc.1
@@ -438,7 +444,7 @@ importers:
         version: 19.2.3
       renoun:
         specifier: 11.1.0
-        version: 11.1.0(prettier@3.8.1)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        version: 11.1.0(prettier@3.8.1)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(tm-themes@1.10.16)
       rolldown:
         specifier: 1.0.0-rc.1
         version: 1.0.0-rc.1
@@ -5175,6 +5181,9 @@ packages:
     resolution: {integrity: sha512-8PWx8tvC4jDB39BQw1m4x8y5MH1BcQ5xHeL2n7UVFulMPH/3Q0uiamahFJ3lXA0zO2SUyRXuVVbWSDmstlt9YA==}
     hasBin: true
 
+  tm-themes@1.10.16:
+    resolution: {integrity: sha512-TqkHDYNogVJ9nnpQtKYZAW50iEOJaXxu1a96wD/WSjeLPWuocSza/ReJI//yXAsVpFR5rS5960E1QknawLxVBg==}
+
   to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
@@ -5866,7 +5875,7 @@ snapshots:
 
   '@babel/helper-skip-transparent-expression-wrappers@7.27.1':
     dependencies:
-      '@babel/traverse': 7.28.5
+      '@babel/traverse': 7.28.6
       '@babel/types': 7.28.6
     transitivePeerDependencies:
       - supports-color
@@ -5940,7 +5949,7 @@ snapshots:
   '@babel/preset-typescript@7.28.5(@babel/core@7.28.5)':
     dependencies:
       '@babel/core': 7.28.5
-      '@babel/helper-plugin-utils': 7.27.1
+      '@babel/helper-plugin-utils': 7.28.6
       '@babel/helper-validator-option': 7.27.1
       '@babel/plugin-syntax-jsx': 7.28.6(@babel/core@7.28.5)
       '@babel/plugin-transform-modules-commonjs': 7.28.6(@babel/core@7.28.5)
@@ -10085,7 +10094,7 @@ snapshots:
 
   parse-json@5.2.0:
     dependencies:
-      '@babel/code-frame': 7.27.1
+      '@babel/code-frame': 7.28.6
       error-ex: 1.3.4
       json-parse-even-better-errors: 2.3.1
       lines-and-columns: 1.2.4
@@ -10388,7 +10397,7 @@ snapshots:
       mdast-util-definitions: 6.0.0
       unist-util-visit: 5.0.0
 
-  renoun@11.1.0(prettier@3.8.1)(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
+  renoun@11.1.0(prettier@3.8.1)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(tm-themes@1.10.16):
     dependencies:
       '@mdx-js/mdx': 3.1.1
       '@renoun/mdx': 3.8.0(react@19.2.3)
@@ -10402,6 +10411,7 @@ snapshots:
       vscode-textmate: 9.3.0
     optionalDependencies:
       prettier: 3.8.1
+      tm-themes: 1.10.16
     transitivePeerDependencies:
       - supports-color
 
@@ -11010,6 +11020,8 @@ snapshots:
   tldts@7.0.19:
     dependencies:
       tldts-core: 7.0.19
+
+  tm-themes@1.10.16: {}
 
   to-regex-range@5.0.1:
     dependencies:

@@ -8,6 +8,7 @@ const nextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
   poweredByHeader: false,
+  transpilePackages: ["@pkgdocs/core", "@pkgdocs/mdx"],
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   /** Enables hot reloading for local packages without a build step */
 

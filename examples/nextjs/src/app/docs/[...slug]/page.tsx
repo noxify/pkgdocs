@@ -1,4 +1,12 @@
-import { removeFromArray, transformedEntries } from "@pkgdocs/core"
+import { Metadata } from "next"
+import { notFound } from "next/navigation"
+
+import {
+  getBreadcrumbItems,
+  getFileForEntry,
+  removeFromArray,
+  transformedEntries,
+} from "@pkgdocs/core"
 
 import { DocsCollection } from "~/collections"
 
@@ -15,12 +23,35 @@ export async function generateStaticParams() {
     })
     .filter(({ slug }) => slug.length > 0)
 
-  console.dir(staticPaths)
-  return [{ slug: ["something"] }, { slug: ["some", "thing"] }]
+  return staticPaths
+}
+
+export async function generateMetadata(params: PageProps<"/docs/[...slug]">): Promise<Metadata> {
+  const { slug } = await params.params
+
+  const breadcrumbItems = await getBreadcrumbItems(DocsCollection, slug)
+
+  const titles = breadcrumbItems.map((ele) => ele.title)
+
+  return {
+    title: `${titles.join(" - ")}`,
+  }
 }
 
 export default async function Page(params: PageProps<"/docs/[...slug]">) {
   const { slug } = await params.params
+  const searchParam = `/${slug.join("/")}`
 
-  return <>Docs: {slug ? slug.join("/") : "index"}</>
+  const transformedEntry = (await transformedEntries(DocsCollection)).find(
+    (ele) => ele.fullPathname == searchParam,
+  )
+
+  if (!transformedEntry) {
+    notFound()
+  }
+
+  const file = await getFileForEntry(DocsCollection, transformedEntry)
+
+  const Content = await file?.getExportValue("default")
+  return <>{Content ? <Content /> : <div>No content</div>}</>
 }
