@@ -52,13 +52,11 @@ export default async function Page(params: PageProps<"/docs/[...slug]">) {
 
   const file = await getFileForEntry(DocsCollection, transformedEntry)
 
-  const [Content, sections, frontmatter] = await Promise.all([
+  const [Content] = await Promise.all([
     file?.getContent(),
     file?.getSections(),
     file?.getFrontmatter(),
   ])
-
-  console.dir({ Content: Content, sections, frontmatter })
 
   return <>{Content ? <Content /> : <div>No content</div>}</>
 }

@@ -1,9 +1,11 @@
+import path from "node:path"
+import { NextConfig } from "next"
+
 import createMdxPlugin from "@pkgdocs/mdx/nextjs"
 
 const withMDX = createMdxPlugin()
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig: NextConfig = {
   output: "export",
   reactStrictMode: true,
   trailingSlash: true,
@@ -20,6 +22,8 @@ const nextConfig = {
   },
 
   experimental: {
+    isolatedDevBuild: true,
+    adapterPath: path.resolve("./src/md-copy-adapter.ts"),
     /**
      * In case you have a lot of pages and experience failing builds,
      * you can enable these experimental feature to reduce the amount of used CPUs

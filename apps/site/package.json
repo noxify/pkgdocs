@@ -1,13 +1,13 @@
 {
-  "name": "@pkgdocs/site",
+  "name": "pkgdocs-site",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "next typegen && next build ",
+    "build": "next typegen && renoun next build ",
     "clean": "git clean -xdf .cache .turbo dist node_modules .next",
     "clean:cache": "git clean -xdf .cache",
-    "dev": "next typegen && next dev",
+    "dev": "next typegen && renoun next dev",
     "format": "prettier --check . --ignore-path ../../.gitignore --ignore-path ../../.prettierignore",
     "lint": "eslint .",
     "preview": "tsx src/localserver.ts",
