@@ -1,5 +1,5 @@
 {
-  "name": "@pkgdocs/nextjs-example",
+  "name": "pkgdocs-nextjs-example",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -7,7 +7,7 @@
     "build": "next typegen && next build ",
     "clean": "git clean -xdf .cache .turbo dist node_modules .next",
     "clean:cache": "git clean -xdf .cache",
-    "dev": "next typegen && next dev",
+    "dev": "next typegen && renoun next dev",
     "format": "prettier --check . --ignore-path ../../.gitignore --ignore-path ../../.prettierignore",
     "lint": "eslint .",
     "preview": "tsx src/localserver.ts",
@@ -32,7 +32,8 @@
     "react-dom": "19.2.3",
     "renoun": "11.1.0",
     "shadcn": "3.7.0",
-    "tm-themes": "1.10.16"
+    "tm-themes": "1.10.16",
+    "ts-morph": "27.0.2"
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "4.7.0",

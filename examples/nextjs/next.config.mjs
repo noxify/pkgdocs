@@ -1,6 +1,6 @@
-import createMDXPlugin from "@pkgdocs/mdx/nextjs"
+import createMdxPlugin from "@pkgdocs/mdx/nextjs"
 
-const withMDX = createMDXPlugin({ options: { providerImportSource: "renoun/mdx/components" } })
+const withMDX = createMdxPlugin()
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -8,10 +8,10 @@ const nextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
   poweredByHeader: false,
-  transpilePackages: ["@pkgdocs/core", "@pkgdocs/mdx"],
+
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   /** Enables hot reloading for local packages without a build step */
-
+  transpilePackages: ["@pkgdocs/core"],
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -28,7 +28,6 @@ const nextConfig = {
      */
     //cpus: process.env.CI ? 4 : undefined,
     // Speed up compilation in dev mode
-    optimizePackageImports: ["renoun", "renoun/file-system"],
   },
 }
 

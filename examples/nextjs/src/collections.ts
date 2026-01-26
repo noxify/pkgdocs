@@ -21,6 +21,11 @@ export function createDirectories() {
       schema: {
         mdx: docSchema,
       },
+      loader: {
+        mdx: (path) => {
+          return import(`../content/${collection}/${path}.mdx`)
+        },
+      },
       filter: directoryFilter,
     })
   })

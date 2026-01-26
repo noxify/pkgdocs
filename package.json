@@ -11,7 +11,7 @@
     "url": "https://github.com/noxify"
   },
   "scripts": {
-    "dev": "turbo dev --filter='@pkgdocs/*'",
+    "dev": "turbo watch dev --filter='@pkgdocs/*' --continue",
     "dev:site": "turbo dev --filter pkgdocs-site",
     "preview": "pnpm -F site preview",
     "build": "turbo build",
@@ -32,7 +32,7 @@
     "test": "vitest",
     "test:core": "pnpm -F core test",
     "cs": "changeset",
-    "example:nextjs": "turbo dev --filter=...@pkgdocs/nextjs-example",
+    "example:nextjs": "pnpm -F pkgdocs-nextjs-example dev",
     "ci:publish": "pnpm build:pkg && pnpm publish -r --access public --publish-branch main && pnpm changeset tag",
     "ci:version": "pnpm changeset version && pnpm install --no-frozen-lockfile && git add ."
   },

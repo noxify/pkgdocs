@@ -23,6 +23,7 @@ export default function mdxPlugin(
 ) {
   const defaultConfig: NextMDXOptions = {
     options: {
+      providerImportSource: "renoun/mdx/components",
       remarkPlugins: [
         "remark-strip-badges",
         "@renoun/mdx/remark/transform-relative-links",
@@ -30,7 +31,9 @@ export default function mdxPlugin(
         "@renoun/mdx/remark/transform-jsdoc-inline-tags",
         "@renoun/mdx/remark/remove-immediate-paragraphs",
         "remark-squeeze-paragraphs",
-        "@renoun/mdx/remark/add-frontmatter",
+        //"@renoun/mdx/remark/add-frontmatter",
+        "remark-frontmatter",
+        "remark-mdx-frontmatter",
         "@renoun/mdx/remark/add-sections",
       ],
       rehypePlugins: [

@@ -47,6 +47,8 @@
   "prettier": "@pkgdocs/prettier-config",
   "dependencies": {
     "rehype-mdx-import-media": "1.2.0",
+    "remark-frontmatter": "5.0.0",
+    "remark-mdx-frontmatter": "5.2.0",
     "remark-squeeze-paragraphs": "6.0.0",
     "remark-strip-badges": "7.0.0"
   },
