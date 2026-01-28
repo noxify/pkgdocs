@@ -1,0 +1,78 @@
+{
+  "name": "@pkgdocs/ui",
+  "version": "0.0.0",
+  "description": "UI package for pkgdocs",
+  "keywords": [
+    "pkgdocs",
+    "documentation",
+    "docs",
+    "ui"
+  ],
+  "homepage": "https://pkgdocs.dev",
+  "bugs": "https://github.com/noxify/pkgdocs/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/noxify/pkgdocs",
+    "directory": "packages/ui"
+  },
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./src/index.ts"
+    },
+    "./layouts/classic": {
+      "types": "./dist/layouts/classic/index.d.ts",
+      "import": "./dist/layouts/classic/index.js",
+      "default": "./src/layouts/classic/index.tsx"
+    },
+    "./layouts/minimal": {
+      "types": "./dist/layouts/minimal/index.d.ts",
+      "import": "./dist/layouts/minimal/index.js",
+      "default": "./src/layouts/minimal/index.tsx"
+    },
+    "./mdx": {
+      "types": "./dist/mdx/index.d.ts",
+      "import": "./dist/mdx/index.js",
+      "default": "./src/mdx/index.tsx"
+    }
+  },
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "rolldown -c rolldown.config.ts",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "clean:cache": "git clean -xdf .cache",
+    "dev": "rolldown -c rolldown.config.ts --watch",
+    "format": "prettier --check . --ignore-path ../../.gitignore --ignore-path ../../.prettierignore",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "prettier": "@pkgdocs/prettier-config",
+  "peerDependencies": {
+    "react": ">=19.0.0",
+    "react-dom": ">=19.0.0"
+  },
+  "devDependencies": {
+    "@pkgdocs/eslint-config": "workspace:*",
+    "@pkgdocs/prettier-config": "workspace:*",
+    "@pkgdocs/tsconfig": "workspace:*",
+    "eslint": "9.39.2",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "rolldown": "1.0.0-rc.1",
+    "rolldown-plugin-dts": "0.21.7",
+    "rollup-plugin-delete": "3.0.2",
+    "typescript": "5.9.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -467,6 +467,39 @@ importers:
         specifier: 5.9.3
         version: 5.9.3
 
+  packages/ui:
+    devDependencies:
+      '@pkgdocs/eslint-config':
+        specifier: workspace:*
+        version: link:../../tooling/eslint
+      '@pkgdocs/prettier-config':
+        specifier: workspace:*
+        version: link:../../tooling/prettier
+      '@pkgdocs/tsconfig':
+        specifier: workspace:*
+        version: link:../../tooling/typescript
+      eslint:
+        specifier: 9.39.2
+        version: 9.39.2(jiti@2.6.1)
+      react:
+        specifier: 19.2.4
+        version: 19.2.4
+      react-dom:
+        specifier: 19.2.4
+        version: 19.2.4(react@19.2.4)
+      rolldown:
+        specifier: 1.0.0-rc.1
+        version: 1.0.0-rc.1
+      rolldown-plugin-dts:
+        specifier: 0.21.7
+        version: 0.21.7(rolldown@1.0.0-rc.1)(typescript@5.9.3)
+      rollup-plugin-delete:
+        specifier: 3.0.2
+        version: 3.0.2(rollup@4.56.0)
+      typescript:
+        specifier: 5.9.3
+        version: 5.9.3
+
   tooling/eslint:
     dependencies:
       '@eslint/compat':
@@ -5862,7 +5895,7 @@ snapshots:
   '@babel/helper-module-imports@7.27.1':
     dependencies:
       '@babel/traverse': 7.28.5
-      '@babel/types': 7.28.5
+      '@babel/types': 7.28.6
     transitivePeerDependencies:
       - supports-color
 
@@ -5928,7 +5961,7 @@ snapshots:
   '@babel/helpers@7.28.4':
     dependencies:
       '@babel/template': 7.27.2
-      '@babel/types': 7.28.5
+      '@babel/types': 7.28.6
 
   '@babel/parser@7.28.5':
     dependencies:
@@ -5998,7 +6031,7 @@ snapshots:
     dependencies:
       '@babel/code-frame': 7.27.1
       '@babel/parser': 7.28.6
-      '@babel/types': 7.28.5
+      '@babel/types': 7.28.6
 
   '@babel/template@7.28.6':
     dependencies:
@@ -7169,16 +7202,16 @@ snapshots:
 
   '@types/babel__generator@7.27.0':
     dependencies:
-      '@babel/types': 7.28.5
+      '@babel/types': 7.28.6
 
   '@types/babel__template@7.4.4':
     dependencies:
       '@babel/parser': 7.28.6
-      '@babel/types': 7.28.5
+      '@babel/types': 7.28.6
 
   '@types/babel__traverse@7.28.0':
     dependencies:
-      '@babel/types': 7.28.5
+      '@babel/types': 7.28.6
 
   '@types/chai@5.2.3':
     dependencies:

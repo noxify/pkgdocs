@@ -1,0 +1,30 @@
+{
+    "extends": "@pkgdocs/tsconfig/internal-package.json",
+    "compilerOptions": {
+        "target": "ES2022",
+        "module": "ESNext",
+        "moduleResolution": "Bundler",
+        "jsx": "react-jsx",
+        "declaration": true,
+        "emitDeclarationOnly": false,
+        "declarationDir": "dist",
+        "outDir": "dist",
+        "skipLibCheck": true,
+        "strict": true,
+        "types": [
+            "react"
+        ],
+        "lib": [
+            "ES2022",
+            "DOM",
+            "DOM.Iterable"
+        ]
+    },
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
