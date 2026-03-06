@@ -11,13 +11,13 @@ export function createDirectories() {
     return new Directory({
       basePathname: collection,
       path: `content/${collection}`,
-      repository: {
-        host: "github",
-        baseUrl: "https://github.com",
-        owner: "noxify",
-        repository: "pkgdocs",
-        path: `examples/nextjs/content/${collection}`,
-      },
+      // repository: {
+      //   host: "github",
+      //   baseUrl: "https://github.com",
+      //   owner: "noxify",
+      //   repository: "pkgdocs",
+      //   path: `examples/nextjs/content/${collection}`,
+      // },
       schema: {
         mdx: docSchema,
       },
@@ -35,4 +35,27 @@ const DocsCollection = new Collection({
   entries: createDirectories(),
 })
 
-export { DocsCollection }
+/**
+ * Generate all static routes for the docs collection, including collection routes and individual entry routes.
+ */
+const staticRoutes = async () => {
+  const collections = await DocsCollection.getEntries({
+    recursive: false,
+    includeIndexAndReadmeFiles: true,
+  })
+
+  const collectionPaths = await Promise.all(
+    collections.map(async (collection) => {
+      const collectionEntries = await collection.getEntries({
+        recursive: true,
+        includeIndexAndReadmeFiles: true,
+      })
+
+      return collectionEntries.map((entry) => entry.getPathnameSegments())
+    }),
+  )
+
+  return collectionPaths.flat()
+}
+
+export { DocsCollection, staticRoutes }

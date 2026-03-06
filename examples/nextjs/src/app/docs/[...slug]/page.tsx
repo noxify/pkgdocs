@@ -8,18 +8,17 @@ import {
   transformedEntries,
 } from "@pkgdocs/core"
 
-import { DocsCollection } from "~/collections"
+import { DocsCollection, staticRoutes } from "~/collections"
 
 export async function generateStaticParams() {
   // Provide concrete paths for the dynamic catch-all param.
   // Do NOT include the parent segment ("docs") in the slug.
-
-  const entries = await transformedEntries(DocsCollection)
+  const entries = await staticRoutes()
 
   const staticPaths = entries
     // get all possible routes including the collection routes
-    .map((entry) => {
-      return { slug: removeFromArray(entry.segments, ["docs"]) }
+    .map((entryPathSegments) => {
+      return { slug: removeFromArray(entryPathSegments, ["docs"]) }
     })
     .filter(({ slug }) => slug.length > 0)
 
