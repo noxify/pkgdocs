@@ -1,15 +1,22 @@
+"use client"
+
+import type { ThemeProviderProps as BetterThemesProps } from "better-themes/rsc"
 import type { PropsWithChildren } from "react"
 import { useMemo } from "react"
+import { ThemeProvider as BetterThemesProvider } from "better-themes/rsc"
 
 import type { DocConfig } from "../types"
 import { toCssVars } from "./tokens"
 
-export function ThemeProvider({ config, children }: PropsWithChildren<{ config: DocConfig }>) {
+export interface ThemeProviderProps extends PropsWithChildren {
+  config: DocConfig
+  theme?: BetterThemesProps
+}
+
+export function ThemeProvider({ config, theme, children }: ThemeProviderProps) {
   const style = useMemo(() => toCssVars(config.theme), [config.theme])
 
-  return (
-    <div style={style} className="doc-theme-root">
-      {children}
-    </div>
-  )
+  const content = <div style={style}>{children}</div>
+
+  return theme ? <BetterThemesProvider {...theme}>{content}</BetterThemesProvider> : content
 }

@@ -27,7 +27,7 @@ export const frontmatterSchema = z.object({
   /** Should the table of contents be displayed. Defaults to true */
   toc: z.boolean().optional().default(true),
   /** Specifies the current page as an external link */
-  externalLink: z.string().url().optional(),
+  externalLink: z.url().optional(),
   /** Should the current page be hidden from the section grid. Defaults to false */
   hideFromSectionGrid: z.boolean().optional().default(false),
 })

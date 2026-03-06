@@ -16,6 +16,8 @@
     "directory": "packages/components"
   },
   "license": "MIT",
+  "author": "noxify",
+  "sideEffects": false,
   "type": "module",
   "exports": {
     ".": {
@@ -31,10 +33,10 @@
     "types"
   ],
   "scripts": {
-    "_build": "rolldown -c rolldown.config.ts",
+    "_build": "tsdown",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "clean:cache": "git clean -xdf .cache",
-    "dev": "rolldown -c rolldown.config.ts --watch",
+    "dev": "tsdown --watch",
     "format": "prettier --check . --ignore-path ../../.gitignore --ignore-path ../../.prettierignore",
     "lint": "eslint .",
     "test": "vitest",
@@ -42,7 +44,7 @@
   },
   "prettier": "@pkgdocs/prettier-config",
   "dependencies": {
-    "zustand": "5.0.10"
+    "zustand": "5.0.11"
   },
   "devDependencies": {
     "@pkgdocs/eslint-config": "workspace:*",
@@ -50,14 +52,12 @@
     "@pkgdocs/tsconfig": "workspace:*",
     "@types/node": "24.10.4",
     "@vitejs/plugin-react": "^5.1.2",
-    "dedent": "1.7.1",
+    "dedent": "1.7.2",
     "eslint": "9.39.2",
-    "memfs": "^4.56.10",
+    "memfs": "^4.56.11",
     "react": "19.2.4",
-    "renoun": "11.1.0",
-    "rolldown": "1.0.0-rc.1",
-    "rolldown-plugin-dts": "0.21.7",
-    "rollup-plugin-delete": "3.0.2",
+    "renoun": "11.4.0",
+    "tsdown": "0.21.0",
     "typescript": "5.9.3",
     "vitest": "4.0.18",
     "zod": "^4.3.6"

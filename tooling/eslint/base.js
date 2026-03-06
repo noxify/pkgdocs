@@ -60,8 +60,6 @@ export default tseslint.config(
       ...tseslint.configs.stylisticTypeChecked,
     ],
     rules: {
-      ...turboPlugin.configs.recommended.rules,
-
       "no-console": "error",
 
       "@typescript-eslint/no-unused-vars": [

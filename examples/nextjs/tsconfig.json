@@ -16,20 +16,12 @@
     "moduleResolution": "Bundler",
     "noEmit": true,
     "tsBuildInfoFile": "${configDir}/.cache/tsbuildinfo.json",
-    "lib": [
-      "es2022",
-      "dom",
-      "dom.iterable"
-    ],
+    "lib": ["es2022", "dom", "dom.iterable"],
     "jsx": "react-jsx",
-    "typeRoots": [
-      "types"
-    ],
+    "typeRoots": ["types"],
     "baseUrl": ".",
     "paths": {
-      "~/*": [
-        "./src/*"
-      ]
+      "~/*": ["./src/*"]
     },
     "plugins": [
       {
@@ -38,19 +30,6 @@
     ],
     "module": "esnext"
   },
-  "include": [
-    ".",
-    ".next/types/**/*.ts",
-    "dist/types/**/*.ts",
-    "types",
-    ".next/dev/types/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "build",
-    "dist",
-    ".next",
-    ".expo",
-    "out"
-  ]
+  "include": [".", ".next/types/**/*.ts", "dist/types/**/*.ts", "types", ".next/dev/types/**/*.ts"],
+  "exclude": ["node_modules", "build", "dist", ".next", ".expo", "out"]
 }

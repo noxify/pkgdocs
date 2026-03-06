@@ -1,7 +1,7 @@
 {
-  "name": "@pkgdocs/mdx",
+  "name": "@pkgdocs/next-config",
   "version": "0.0.0",
-  "description": "mdx package for pkgdocs",
+  "description": "nextjs related config for pkgdocs",
   "keywords": [
     "pkgdocs",
     "documentation",
@@ -13,7 +13,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/noxify/pkgdocs",
-    "directory": "packages/mdx"
+    "directory": "packages/next-config"
   },
   "license": "MIT",
   "type": "module",
@@ -22,11 +22,6 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./src/index.ts"
-    },
-    "./nextjs": {
-      "types": "./dist/nextjs.d.ts",
-      "import": "./dist/nextjs.js",
-      "default": "./src/nextjs.ts"
     }
   },
   "main": "./dist/index.js",
@@ -36,36 +31,34 @@
     "types"
   ],
   "scripts": {
-    "build": "rolldown -c rolldown.config.ts",
+    "build": "tsdown",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "clean:cache": "git clean -xdf .cache",
-    "dev": "rolldown -c rolldown.config.ts --watch",
+    "dev": "tsdown --watch",
     "format": "prettier --check . --ignore-path ../../.gitignore --ignore-path ../../.prettierignore",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
   "prettier": "@pkgdocs/prettier-config",
   "dependencies": {
-    "rehype-mdx-import-media": "1.2.0",
+    "rehype-mdx-import-media": "1.4.0",
     "remark-frontmatter": "5.0.0",
     "remark-mdx-frontmatter": "5.2.0",
     "remark-squeeze-paragraphs": "6.0.0",
     "remark-strip-badges": "7.0.0"
   },
   "devDependencies": {
-    "@next/mdx": "16.1.5",
+    "@next/mdx": "16.1.6",
     "@pkgdocs/eslint-config": "workspace:*",
     "@pkgdocs/prettier-config": "workspace:*",
     "@pkgdocs/tsconfig": "workspace:*",
-    "@renoun/mdx": "3.8.0",
+    "@renoun/mdx": "3.8.1",
     "@types/node": "24.10.4",
     "eslint": "9.39.2",
-    "next": "16.1.5",
+    "next": "16.1.6",
     "react": "19.2.4",
-    "renoun": "11.1.0",
-    "rolldown": "1.0.0-rc.1",
-    "rolldown-plugin-dts": "0.21.7",
-    "rollup-plugin-delete": "3.0.2",
+    "renoun": "11.4.0",
+    "tsdown": "0.21.0",
     "typescript": "5.9.3"
   },
   "peerDependencies": {

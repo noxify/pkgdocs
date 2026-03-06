@@ -47,15 +47,18 @@
     "src"
   ],
   "scripts": {
-    "build": "rolldown -c rolldown.config.ts",
+    "build": "tsdown",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
     "clean:cache": "git clean -xdf .cache",
-    "dev": "rolldown -c rolldown.config.ts --watch",
+    "dev": "tsdown --watch",
     "format": "prettier --check . --ignore-path ../../.gitignore --ignore-path ../../.prettierignore",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit"
   },
   "prettier": "@pkgdocs/prettier-config",
+  "dependencies": {
+    "better-themes": "1.1.0"
+  },
   "peerDependencies": {
     "react": ">=19.0.0",
     "react-dom": ">=19.0.0"
@@ -67,9 +70,7 @@
     "eslint": "9.39.2",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "rolldown": "1.0.0-rc.1",
-    "rolldown-plugin-dts": "0.21.7",
-    "rollup-plugin-delete": "3.0.2",
+    "tsdown": "0.21.0",
     "typescript": "5.9.3"
   },
   "publishConfig": {

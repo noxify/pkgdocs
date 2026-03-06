@@ -1,8 +1,13 @@
 import type { Metadata } from "next"
-import type React from "react"
-import { RootProvider } from "renoun/components"
+import { RootProvider } from "renoun"
+
+import { loadDocConfig } from "@pkgdocs/config"
+
+import { ThemeProviderWrapper } from "~/components/ThemeProviderWrapper"
 
 import "~/styles/globals.css"
+
+const docConfig = await loadDocConfig()
 
 export const metadata: Metadata = {
   title: "pkgdocs",
@@ -11,16 +16,24 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <RootProvider
-      theme={{
-        light: "vitesse-light",
-        dark: "vitesse-dark",
-      }}
-      languages={["ts", "tsx", "mdx"]}
-      git="noxify/pkgdocs"
-    >
+    <RootProvider {...docConfig.renoun}>
       <html lang="en" suppressHydrationWarning>
-        <body>{children}</body>
+        <body>
+          <ThemeProviderWrapper
+            config={{
+              layoutKey: docConfig.layout ?? "classic",
+              theme: docConfig.ui?.theme,
+            }}
+            theme={{
+              attribute: "class",
+              defaultTheme: docConfig.defaultTheme ?? "system",
+              enableSystem: true,
+              ...docConfig.betterThemes,
+            }}
+          >
+            {children}
+          </ThemeProviderWrapper>
+        </body>
       </html>
     </RootProvider>
   )

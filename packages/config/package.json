@@ -1,23 +1,21 @@
 {
-  "name": "@pkgdocs/core",
+  "name": "@pkgdocs/config",
   "version": "0.0.0",
-  "description": "Core package for pkgdocs",
+  "description": "Configuration management for pkgdocs",
   "keywords": [
     "pkgdocs",
     "documentation",
-    "docs",
-    "generator"
+    "config",
+    "configuration"
   ],
   "homepage": "https://pkgdocs.dev",
   "bugs": "https://github.com/noxify/pkgdocs/issues",
   "repository": {
     "type": "git",
     "url": "https://github.com/noxify/pkgdocs",
-    "directory": "packages/core"
+    "directory": "packages/config"
   },
   "license": "MIT",
-  "author": "noxify",
-  "sideEffects": false,
   "type": "module",
   "exports": {
     ".": {
@@ -26,14 +24,12 @@
       "default": "./src/index.ts"
     }
   },
-  "imports": {
-    "#fixtures/*": "./fixtures/*"
-  },
+  "sideEffects": false,
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist",
-    "types"
+    "src"
   ],
   "scripts": {
     "build": "tsdown",
@@ -42,29 +38,26 @@
     "dev": "tsdown --watch",
     "format": "prettier --check . --ignore-path ../../.gitignore --ignore-path ../../.prettierignore",
     "lint": "eslint .",
-    "test": "vitest",
     "typecheck": "tsc --noEmit"
   },
   "prettier": "@pkgdocs/prettier-config",
+  "peerDependencies": {
+    "better-themes": "1.1.0",
+    "renoun": "11.1.0"
+  },
   "devDependencies": {
-    "@mdx-js/rollup": "3.1.1",
     "@pkgdocs/eslint-config": "workspace:*",
     "@pkgdocs/prettier-config": "workspace:*",
     "@pkgdocs/tsconfig": "workspace:*",
+    "@pkgdocs/ui": "workspace:*",
     "@types/node": "24.10.4",
-    "dedent": "1.7.2",
+    "better-themes": "1.1.0",
     "eslint": "9.39.2",
-    "memfs": "^4.56.11",
-    "react": "19.2.4",
     "renoun": "11.4.0",
     "tsdown": "0.21.0",
-    "typescript": "5.9.3",
-    "vitest": "4.0.18",
-    "zod": "^4.3.6"
+    "typescript": "5.9.3"
   },
-  "peerDependencies": {
-    "react": "^19.2",
-    "renoun": "11.4.0",
-    "zod": "^4"
+  "publishConfig": {
+    "access": "public"
   }
 }

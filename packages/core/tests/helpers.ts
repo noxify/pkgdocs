@@ -1,13 +1,16 @@
-import { join } from "node:path"
-import { Collection, Directory } from "renoun"
+import { dirname, join } from "node:path"
+import { fileURLToPath, pathToFileURL } from "node:url"
+import { Collection, Directory } from "renoun/file-system"
 
+import type { DirectoryType, SourceCollection } from "~/types"
 import { directoryFilter } from "~/helpers"
 import { docSchema } from "~/schema"
 
 const sources = ["getting-started", "api"]
-const contentRoot = join(process.cwd(), "packages/core")
+const packageRoot = join(dirname(fileURLToPath(import.meta.url)), "..")
+const contentRoot = packageRoot
 
-export function createSourceCollection() {
+export function createSourceCollection(): SourceCollection {
   const collection = new Collection({
     entries: generateDirectories(),
   })
@@ -15,27 +18,32 @@ export function createSourceCollection() {
   return collection
 }
 
-export function generateDirectories() {
-  return sources.map((source) => {
+export function generateDirectories(): DirectoryType[] {
+  const directories = sources.map((source) => {
     return new Directory({
       path: join(contentRoot, "fixtures/content/", source),
-      basePathname: source,
-      repository: {
-        host: "github",
-        baseUrl: "https://github.com",
-        owner: "noxify",
-        repository: "pkgdocs",
-        path: `content/${source}`,
-      },
+      // basePathname: source,
+      // repository: {
+      //   host: "github",
+      //   baseUrl: "https://github.com",
+      //   owner: "noxify",
+      //   repository: "pkgdocs",
+      //   path: `content/${source}`,
+      // },
       schema: {
         mdx: docSchema,
       },
       loader: {
-        mdx: (path) => import(`#fixtures/content/${source}/${path}.mdx`),
+        mdx: (path) => {
+          const absoluteFilePath = join(contentRoot, "fixtures", "content", source, `${path}.mdx`)
+          return import(pathToFileURL(absoluteFilePath).href)
+        },
       },
       // hide hidden files ( starts with `_` ) and all asset directories ( `_assets` )
       // exclude also files which starts with a dot ( `.` ), which is needed for our datasources content
       filter: directoryFilter,
     })
   })
+
+  return directories
 }
