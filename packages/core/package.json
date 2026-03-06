@@ -22,14 +22,11 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "default": "./src/index.ts"
     }
   },
-  "imports": {
-    "#fixtures/*": "./fixtures/*"
-  },
-  "main": "./dist/index.js",
+  "main": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "files": [
     "dist",

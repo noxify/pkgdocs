@@ -8,6 +8,7 @@
     "docs",
     "generator"
   ],
+  "author": "noxify",
   "homepage": "https://pkgdocs.dev",
   "bugs": "https://github.com/noxify/pkgdocs/issues",
   "repository": {
@@ -16,16 +17,17 @@
     "directory": "packages/next-config"
   },
   "license": "MIT",
+  "sideEffects": false,
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
       "default": "./src/index.ts"
     }
   },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "files": [
     "dist",
     "types"

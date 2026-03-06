@@ -2,6 +2,7 @@
   "name": "@pkgdocs/ui",
   "version": "0.0.0",
   "description": "UI package for pkgdocs",
+  "author": "noxify",
   "keywords": [
     "pkgdocs",
     "documentation",
@@ -19,32 +20,31 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
       "default": "./src/index.ts"
     },
     "./layouts/classic": {
-      "types": "./dist/layouts/classic/index.d.ts",
-      "import": "./dist/layouts/classic/index.js",
+      "types": "./dist/layouts/classic/index.d.mts",
+      "import": "./dist/layouts/classic/index.mjs",
       "default": "./src/layouts/classic/index.tsx"
     },
     "./layouts/minimal": {
-      "types": "./dist/layouts/minimal/index.d.ts",
-      "import": "./dist/layouts/minimal/index.js",
+      "types": "./dist/layouts/minimal/index.d.mts",
+      "import": "./dist/layouts/minimal/index.mjs",
       "default": "./src/layouts/minimal/index.tsx"
     },
     "./mdx": {
-      "types": "./dist/mdx/index.d.ts",
-      "import": "./dist/mdx/index.js",
+      "types": "./dist/mdx/index.d.mts",
+      "import": "./dist/mdx/index.mjs",
       "default": "./src/mdx/index.tsx"
     }
   },
   "sideEffects": false,
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "scripts": {
     "build": "tsdown",

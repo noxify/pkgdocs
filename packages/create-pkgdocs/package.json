@@ -17,12 +17,19 @@
     "directory": "packages/create-pkgdocs"
   },
   "license": "MIT",
+  "author": "noxify",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs"
+    }
+  },
+  "sideEffects": false,
   "bin": {
-    "create-pkgdocs": "dist/index.js"
+    "create-pkgdocs": "dist/index.mjs"
   },
   "files": [
-    "dist/*"
+    "dist"
   ],
   "scripts": {
     "build": "tsdown",

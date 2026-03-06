@@ -1,7 +1,12 @@
 import { existsSync, readFileSync } from "fs"
 import { resolve } from "path"
+import { pathToFileURL } from "url"
 
 import type { DocConfigFile } from "./types"
+
+const runtimeImport = new Function("modulePath", "return import(modulePath)") as (
+  modulePath: string,
+) => Promise<{ default?: unknown } & Record<string, unknown>>
 
 /**
  * Helper function for type-safe config definition
@@ -44,10 +49,9 @@ export async function loadDocConfig(configPath?: string): Promise<DocConfigFile>
       return JSON.parse(content) as DocConfigFile
     }
 
-    // For .mjs and .js files, we need to use dynamic import
-    // Convert file path to file:// URL for import
-    const fileUrl = `file://${configPath_}`
-    const imported = await import(fileUrl)
+    // Use runtime dynamic import so bundlers do not attempt to statically resolve file paths.
+    const fileUrl = pathToFileURL(configPath_).href
+    const imported = await runtimeImport(fileUrl)
     const config = imported.default ?? imported
 
     if (typeof config === "function") {

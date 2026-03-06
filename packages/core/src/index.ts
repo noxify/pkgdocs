@@ -3,8 +3,6 @@ export type { EntryType, DirectoryType, Frontmatter, TransformedEntry } from "./
 export { frontmatterSchema, docSchema } from "./schema"
 export type { DocSchema } from "./schema"
 
-export { optionalCache } from "./cache"
-
 export {
   getTitle,
   flattenEntries,
