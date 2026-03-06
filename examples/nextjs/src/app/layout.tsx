@@ -8,6 +8,7 @@ import { ThemeProviderWrapper } from "~/components/ThemeProviderWrapper"
 import "~/styles/globals.css"
 
 const docConfig = await loadDocConfig()
+const uiConfig = docConfig.ui ?? {}
 
 export const metadata: Metadata = {
   title: "pkgdocs",
@@ -21,8 +22,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <body>
           <ThemeProviderWrapper
             config={{
-              layoutKey: docConfig.layout ?? "classic",
-              theme: docConfig.ui?.theme,
+              layoutKey: docConfig.layout ?? uiConfig.layoutKey ?? "classic",
+              options: uiConfig.options,
+              theme: uiConfig.theme,
+              features: uiConfig.features,
             }}
             theme={{
               attribute: "class",

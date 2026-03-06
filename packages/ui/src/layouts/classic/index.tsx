@@ -27,6 +27,8 @@ export function ClassicLayout({ children, config }: LayoutProps) {
             padding: "var(--space-y) var(--space-x)",
           }}
         >
+          Classic layout sidebar. You can customize this layout or create your own by following the
+          documentation.
           {/* Navigation / TOC */}
         </aside>
       )}

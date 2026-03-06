@@ -6,6 +6,7 @@ import { useMemo } from "react"
 import { ThemeProvider as BetterThemesProvider } from "better-themes/rsc"
 
 import type { DocConfig } from "../types"
+import { resolveLayout } from "../registry/layouts"
 import { toCssVars } from "./tokens"
 
 export interface ThemeProviderProps extends PropsWithChildren {
@@ -15,8 +16,13 @@ export interface ThemeProviderProps extends PropsWithChildren {
 
 export function ThemeProvider({ config, theme, children }: ThemeProviderProps) {
   const style = useMemo(() => toCssVars(config.theme), [config.theme])
+  const Layout = useMemo(() => resolveLayout(config.layoutKey), [config.layoutKey])
 
-  const content = <div style={style}>{children}</div>
+  const content = (
+    <div style={style}>
+      <Layout config={config}>{children}</Layout>
+    </div>
+  )
 
   return theme ? <BetterThemesProvider {...theme}>{content}</BetterThemesProvider> : content
 }
