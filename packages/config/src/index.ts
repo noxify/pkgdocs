@@ -16,15 +16,15 @@ export function defineConfig(config: DocConfigFile): DocConfigFile {
 }
 
 /**
- * Loads the documentation configuration from a config.mjs, config.js, or config.json file
- * @param configPath - Path to the config file (defaults to process.cwd()/config.mjs or config.js or config.json)
+ * Loads the documentation configuration from a pkgdocs.config.mjs, pkgdocs.config.js, or pkgdocs.config.json file
+ * @param configPath - Path to the config file (defaults to process.cwd()/pkgdocs.config.mjs or pkgdocs.config.js or pkgdocs.config.json)
  * @returns The parsed configuration object
  */
 export async function loadDocConfig(configPath?: string): Promise<DocConfigFile> {
   const basePath = configPath ? resolve(configPath) : resolve(process.cwd())
-  const mjsConfigPath = resolve(basePath, "config.mjs")
-  const jsConfigPath = resolve(basePath, "config.js")
-  const jsonConfigPath = resolve(basePath, "config.json")
+  const mjsConfigPath = resolve(basePath, "pkgdocs.config.mjs")
+  const jsConfigPath = resolve(basePath, "pkgdocs.config.js")
+  const jsonConfigPath = resolve(basePath, "pkgdocs.config.json")
 
   let configPath_: string | undefined
 
@@ -38,7 +38,7 @@ export async function loadDocConfig(configPath?: string): Promise<DocConfigFile>
 
   if (!configPath_) {
     console.warn(
-      `Config file not found in ${basePath}. Checked for config.mjs, config.js, and config.json. Using default configuration.`,
+      `Config file not found in ${basePath}. Checked for pkgdocs.config.mjs, pkgdocs.config.js, and pkgdocs.config.json. Using default configuration.`,
     )
     return {}
   }

@@ -1,7 +1,9 @@
 import { defineConfig } from "tsdown"
 
 export default defineConfig({
-  entry: "src/index.ts",
+  entry: {
+    "hooks/*": ["./src/hooks/*.tsx", "./src/hooks/*.ts"],
+  },
   minify: true,
   dts: true,
   tsconfig: "./tsconfig.json",
