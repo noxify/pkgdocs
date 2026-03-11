@@ -53,7 +53,7 @@ jobs:
 
       - name: Build packages
         run: |
-          pnpm --filter "./packages/*" build
+          pnpm build:pkg
 
       - name: Test Core Package
         run: pnpm test:core

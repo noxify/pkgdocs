@@ -48,8 +48,11 @@ function mergeUnique<TItem>(base: readonly TItem[] = [], extra: readonly TItem[]
 
 export function createNextMdxComponents(opts: CreateNextMdxOptions = {}): MDXComponents {
   const adapter = createNextFrameworkAdapter(opts.next)
+  const createMdxComponentsSafe = createMdxComponents as (
+    options: CreateMdxOptions,
+  ) => MDXComponents
 
-  return createMdxComponents({
+  return createMdxComponentsSafe({
     ...opts,
     adapter,
   })

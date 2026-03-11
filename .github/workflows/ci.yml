@@ -39,7 +39,10 @@ jobs:
         uses: ./.github/setup
 
       - name: Generate next types
-        run: pnpm -F @pkgdocs/site typegen
+        run: pnpm -F pkgdocs-site typegen
+
+      - name: Build packages
+        run: pnpm build:pkg
 
       - name: Lint
         run: pnpm lint
