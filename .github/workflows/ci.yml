@@ -38,11 +38,14 @@ jobs:
       - name: Setup
         uses: ./.github/setup
 
-      - name: Generate next types
-        run: pnpm -F pkgdocs-site typegen
-
       - name: Build packages
         run: pnpm build:pkg
+
+      - name: Generate next types ( pkgdocs-site )
+        run: pnpm -F pkgdocs-site typegen
+
+      - name: Generate next types ( pkgdocs-nextjs-example )
+        run: pnpm -F pkgdocs-nextjs-example typegen
 
       - name: Lint
         run: pnpm lint
@@ -69,8 +72,11 @@ jobs:
       - name: Build packages
         run: pnpm build:pkg
 
-      - name: Generate next types
-        run: pnpm -F @pkgdocs/site typegen
+      - name: Generate next types ( pkgdocs-site )
+        run: pnpm -F pkgdocs-site typegen
+
+      - name: Generate next types ( pkgdocs-nextjs-example )
+        run: pnpm -F pkgdocs-nextjs-example typegen
 
       - name: Typecheck
         run: pnpm typecheck
