@@ -29,3 +29,6 @@ export {
 
 export type { TreeItem } from "./navigation"
 export { buildTree, getTree, getAllTrees } from "./navigation"
+
+export { isActive } from "./is-active"
+export { currentLink, current } from "./current-link"
