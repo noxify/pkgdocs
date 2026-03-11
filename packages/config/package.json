@@ -59,5 +59,8 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "valibot": "^1.2.0"
   }
 }

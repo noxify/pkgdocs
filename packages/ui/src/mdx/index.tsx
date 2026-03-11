@@ -1,4 +1,5 @@
 import type { CreateMdxOptions, MdxComponents } from "./types"
+import { resolveFrameworkAdapter } from "../framework"
 import { Callout } from "./components/Callout"
 import { CodeBlock } from "./components/CodeBlock"
 
@@ -16,5 +17,18 @@ function defaults(): MdxComponents {
 }
 
 export function createMdxComponents(opts: CreateMdxOptions = {}): MdxComponents {
-  return { ...defaults(), ...(opts.overrides ?? {}) }
+  const adapter = resolveFrameworkAdapter(opts.adapter)
+  const adapterComponents: Partial<MdxComponents> = {}
+
+  if (adapter.components?.Link) {
+    const link = adapter.components.Link
+    adapterComponents.a = (p) => link(p)
+  }
+
+  if (adapter.components?.Image) {
+    const image = adapter.components.Image
+    adapterComponents.img = (p) => image(p)
+  }
+
+  return Object.assign({}, defaults(), adapterComponents, opts.overrides) as MdxComponents
 }

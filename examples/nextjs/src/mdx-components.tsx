@@ -1,6 +1,8 @@
 import type { MDXComponents } from "mdx/types"
 
-const components: MDXComponents = {}
+import { nextMdxComponents } from "~/lib/framework-adapter"
+
+const components: MDXComponents = nextMdxComponents
 
 export function useMDXComponents(): MDXComponents {
   return components

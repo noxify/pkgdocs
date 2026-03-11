@@ -1,7 +1,7 @@
 import path from "node:path"
 import { NextConfig } from "next"
 
-import createMdxPlugin from "@pkgdocs/next-config"
+import createMdxPlugin from "@pkgdocs/next-adapter"
 
 const withMDX = createMdxPlugin()
 
@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
 
   pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
   /** Enables hot reloading for local packages without a build step */
-  transpilePackages: ["@pkgdocs/core", "@pkgdocs/next-config", "@pkgdocs/ui"],
+  transpilePackages: ["@pkgdocs/core", "@pkgdocs/next-adapter", "@pkgdocs/ui"],
   typescript: {
     ignoreBuildErrors: true,
   },

@@ -1,12 +1,18 @@
 import { existsSync, readFileSync } from "fs"
 import { resolve } from "path"
 import { pathToFileURL } from "url"
+import * as v from "valibot"
 
 import type { DocConfigFile } from "./types"
+import { DocConfigFileSchema } from "./types"
 
 const runtimeImport = new Function("modulePath", "return import(modulePath)") as (
   modulePath: string,
 ) => Promise<{ default?: unknown } & Record<string, unknown>>
+
+export function validateDocConfig(config: unknown): DocConfigFile {
+  return v.parse(DocConfigFileSchema, config)
+}
 
 /**
  * Helper function for type-safe config definition
@@ -46,7 +52,7 @@ export async function loadDocConfig(configPath?: string): Promise<DocConfigFile>
   try {
     if (configPath_.endsWith(".json")) {
       const content = readFileSync(configPath_, "utf-8")
-      return JSON.parse(content) as DocConfigFile
+      return validateDocConfig(JSON.parse(content))
     }
 
     // Use runtime dynamic import so bundlers do not attempt to statically resolve file paths.
@@ -55,10 +61,10 @@ export async function loadDocConfig(configPath?: string): Promise<DocConfigFile>
     const config = imported.default ?? imported
 
     if (typeof config === "function") {
-      return config()
+      return validateDocConfig(config())
     }
 
-    return config as DocConfigFile
+    return validateDocConfig(config)
   } catch (error) {
     throw new Error(
       `Failed to load config file at ${configPath_}: ${error instanceof Error ? error.message : String(error)}`,
@@ -66,4 +72,4 @@ export async function loadDocConfig(configPath?: string): Promise<DocConfigFile>
   }
 }
 
-export type { DocConfigFile } from "./types"
+export type { DocConfigFile, FrameworkConfig } from "./types"

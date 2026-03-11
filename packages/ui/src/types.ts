@@ -1,7 +1,26 @@
-import type { PropsWithChildren } from "react"
+import type { ComponentProps, PropsWithChildren, ReactNode } from "react"
+
+export type FrameworkLinkProps = ComponentProps<"a">
+export type FrameworkImageProps = ComponentProps<"img">
+
+export interface FrameworkComponents {
+  Link?: (props: FrameworkLinkProps) => ReactNode
+  Image?: (props: FrameworkImageProps) => ReactNode
+}
+
+export interface FrameworkCapabilities {
+  supportsPrefetch?: boolean
+  hasOptimizedImage?: boolean
+}
+
+export interface FrameworkAdapter {
+  components?: FrameworkComponents
+  capabilities?: FrameworkCapabilities
+}
 
 export interface DocConfig {
   layoutKey: string
+  framework?: FrameworkCapabilities
   options?: {
     sidebar?: "left" | "right" | "none"
     contentWidth?: string

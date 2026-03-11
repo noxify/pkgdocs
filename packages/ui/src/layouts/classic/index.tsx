@@ -3,6 +3,8 @@ import type { LayoutProps } from "../../types"
 export function ClassicLayout({ children, config }: LayoutProps) {
   const sidebar = config.options?.sidebar ?? "left"
   const contentWidth = config.options?.contentWidth ?? "72ch"
+  const supportsPrefetch = config.framework?.supportsPrefetch ?? false
+  const hasOptimizedImage = config.framework?.hasOptimizedImage ?? false
 
   return (
     <div
@@ -29,6 +31,10 @@ export function ClassicLayout({ children, config }: LayoutProps) {
         >
           Classic layout sidebar. You can customize this layout or create your own by following the
           documentation.
+          <p style={{ color: "var(--color-muted)", marginTop: "0.75rem", fontSize: "0.875rem" }}>
+            Routing prefetch: {supportsPrefetch ? "enabled" : "disabled"} | Optimized images:{" "}
+            {hasOptimizedImage ? "enabled" : "disabled"}
+          </p>
           {/* Navigation / TOC */}
         </aside>
       )}
