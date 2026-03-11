@@ -74,6 +74,26 @@ describe("createNextFrameworkAdapter", () => {
     expect((element as { props: { prefetch?: boolean } }).props.prefetch).toBe(false)
   })
 
+  it("prefers per-link prefetch over adapter default", () => {
+    const adapter = createNextFrameworkAdapter({ prefetch: false })
+    const element = adapter.components.Link({ href: "/docs", children: "Docs", prefetch: true })
+
+    expect((element as { type: unknown }).type).toBe(NextLink)
+    expect((element as { props: { prefetch?: boolean } }).props.prefetch).toBe(true)
+  })
+
+  it("does not pass prefetch to native anchors", () => {
+    const adapter = createNextFrameworkAdapter({ prefetch: true })
+    const element = adapter.components.Link({
+      href: "https://pkgdocs.dev",
+      children: "Docs",
+      prefetch: false,
+    })
+
+    expect((element as { type: unknown }).type).toBe("a")
+    expect((element as { props: { prefetch?: boolean } }).props.prefetch).toBeUndefined()
+  })
+
   it("uses native img when dimensions are missing", () => {
     const adapter = createNextFrameworkAdapter()
     const element = adapter.components.Image({ src: "/hero.png", alt: "Hero" })

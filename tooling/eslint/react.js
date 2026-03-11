@@ -8,7 +8,7 @@ export default [
     files: ["**/*.ts", "**/*.tsx"],
     plugins: {
       react: reactPlugin,
-      hooks: hooksPlugin,
+      "react-hooks": hooksPlugin,
     },
     rules: {
       ...reactPlugin.configs["jsx-runtime"].rules,

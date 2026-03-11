@@ -1,11 +1,10 @@
 import type { Metadata } from "next"
-import { RootProvider } from "renoun"
+import { RootProvider } from "renoun/components/RootProvider"
 
 import { loadDocConfig } from "@pkgdocs/config"
-import { FrameworkProvider } from "@pkgdocs/ui"
 
+import { FrameworkProviderWrapper } from "~/components/FrameworkProviderWrapper"
 import { ThemeProviderWrapper } from "~/components/ThemeProviderWrapper"
-import { nextFrameworkAdapter } from "~/lib/framework-adapter"
 
 import "~/styles/globals.css"
 
@@ -22,7 +21,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <RootProvider {...docConfig.renoun}>
       <html lang="en" suppressHydrationWarning>
         <body>
-          <FrameworkProvider adapter={nextFrameworkAdapter}>
+          <FrameworkProviderWrapper>
             <ThemeProviderWrapper
               config={{
                 layoutKey: docConfig.layout ?? uiConfig.layoutKey ?? "classic",
@@ -39,7 +38,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             >
               {children}
             </ThemeProviderWrapper>
-          </FrameworkProvider>
+          </FrameworkProviderWrapper>
         </body>
       </html>
     </RootProvider>

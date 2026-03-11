@@ -1,11 +1,15 @@
+import type { FrameworkImageProps, FrameworkLinkProps } from "../types"
 import type { CreateMdxOptions, MdxComponents } from "./types"
-import { resolveFrameworkAdapter } from "../framework"
+import { resolveFrameworkAdapter } from "../framework/adapter"
 import { Callout } from "./components/Callout"
 import { CodeBlock } from "./components/CodeBlock"
 
 function defaults(): MdxComponents {
   return {
-    a: (p) => <a {...p} />,
+    a: (p) => {
+      const { prefetch: _prefetch, ...anchorProps } = p as FrameworkLinkProps
+      return <a {...anchorProps} />
+    },
     pre: (p) => <pre {...p} />,
     code: (p) => <code {...p} />,
     img: (p) => <img {...p} />,
@@ -22,13 +26,17 @@ export function createMdxComponents(opts: CreateMdxOptions = {}): MdxComponents 
 
   if (adapter.components?.Link) {
     const link = adapter.components.Link
-    adapterComponents.a = (p) => link(p)
+    const linkComponent: NonNullable<MdxComponents["a"]> = (p: FrameworkLinkProps) => link(p)
+    adapterComponents.a = linkComponent
   }
 
   if (adapter.components?.Image) {
     const image = adapter.components.Image
-    adapterComponents.img = (p) => image(p)
+    const imageComponent: NonNullable<MdxComponents["img"]> = (p: FrameworkImageProps) => image(p)
+    adapterComponents.img = imageComponent
   }
 
   return Object.assign({}, defaults(), adapterComponents, opts.overrides) as MdxComponents
 }
+
+export type { CreateMdxOptions, MdxComponents } from "./types"

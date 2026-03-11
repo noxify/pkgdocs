@@ -6,9 +6,16 @@ import * as v from "valibot"
 import type { DocConfigFile } from "./types"
 import { DocConfigFileSchema } from "./types"
 
-const runtimeImport = new Function("modulePath", "return import(modulePath)") as (
+async function runtimeImport(
   modulePath: string,
-) => Promise<{ default?: unknown } & Record<string, unknown>>
+): Promise<{ default?: unknown } & Record<string, unknown>> {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  return import(
+    /* webpackIgnore: true */
+    /* @vite-ignore */
+    modulePath
+  )
+}
 
 export function validateDocConfig(config: unknown): DocConfigFile {
   return v.parse(DocConfigFileSchema, config)
@@ -43,6 +50,7 @@ export async function loadDocConfig(configPath?: string): Promise<DocConfigFile>
   }
 
   if (!configPath_) {
+    // eslint-disable-next-line no-console
     console.warn(
       `Config file not found in ${basePath}. Checked for pkgdocs.config.mjs, pkgdocs.config.js, and pkgdocs.config.json. Using default configuration.`,
     )
@@ -61,6 +69,7 @@ export async function loadDocConfig(configPath?: string): Promise<DocConfigFile>
     const config = imported.default ?? imported
 
     if (typeof config === "function") {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       return validateDocConfig(config())
     }
 

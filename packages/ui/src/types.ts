@@ -1,6 +1,8 @@
 import type { ComponentProps, PropsWithChildren, ReactNode } from "react"
 
-export type FrameworkLinkProps = ComponentProps<"a">
+export type FrameworkLinkProps = ComponentProps<"a"> & {
+  prefetch?: boolean
+}
 export type FrameworkImageProps = ComponentProps<"img">
 
 export interface FrameworkComponents {

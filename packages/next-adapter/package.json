@@ -23,7 +23,12 @@
     ".": {
       "types": "./dist/index.d.mts",
       "import": "./dist/index.mjs",
-      "default": "./src/index.ts"
+      "default": "./dist/index.mjs"
+    },
+    "./framework": {
+      "types": "./dist/framework.d.mts",
+      "import": "./dist/framework.mjs",
+      "default": "./dist/framework.mjs"
     }
   },
   "main": "./dist/index.mjs",
@@ -62,7 +67,7 @@
     "next": "16.1.6",
     "react": "19.2.4",
     "renoun": "11.4.0",
-    "tsdown": "0.21.0",
+    "tsdown": "0.21.1",
     "typescript": "5.9.3",
     "vitest": "4.0.18"
   },

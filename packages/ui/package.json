@@ -22,22 +22,32 @@
     ".": {
       "types": "./dist/index.d.mts",
       "import": "./dist/index.mjs",
-      "default": "./src/index.ts"
+      "default": "./dist/index.mjs"
+    },
+    "./framework": {
+      "types": "./dist/framework.d.mts",
+      "import": "./dist/framework.mjs",
+      "default": "./dist/framework.mjs"
     },
     "./layouts/classic": {
-      "types": "./dist/layouts/classic/index.d.mts",
-      "import": "./dist/layouts/classic/index.mjs",
-      "default": "./src/layouts/classic/index.tsx"
+      "types": "./dist/layouts/classic.d.mts",
+      "import": "./dist/layouts/classic.mjs",
+      "default": "./dist/layouts/classic.mjs"
     },
     "./layouts/minimal": {
-      "types": "./dist/layouts/minimal/index.d.mts",
-      "import": "./dist/layouts/minimal/index.mjs",
-      "default": "./src/layouts/minimal/index.tsx"
+      "types": "./dist/layouts/minimal.d.mts",
+      "import": "./dist/layouts/minimal.mjs",
+      "default": "./dist/layouts/minimal.mjs"
     },
     "./mdx": {
-      "types": "./dist/mdx/index.d.mts",
-      "import": "./dist/mdx/index.mjs",
-      "default": "./src/mdx/index.tsx"
+      "types": "./dist/mdx.d.mts",
+      "import": "./dist/mdx.mjs",
+      "default": "./dist/mdx.mjs"
+    },
+    "./theme": {
+      "types": "./dist/theme.d.mts",
+      "import": "./dist/theme.mjs",
+      "default": "./dist/theme.mjs"
     }
   },
   "sideEffects": false,
@@ -70,7 +80,7 @@
     "eslint": "9.39.2",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "tsdown": "0.21.0",
+    "tsdown": "0.21.1",
     "typescript": "5.9.3"
   },
   "publishConfig": {
