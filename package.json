@@ -51,7 +51,8 @@
   "prettier": "@pkgdocs/prettier-config",
   "pnpm": {
     "overrides": {
-      "@modelcontextprotocol/sdk@<1.25.2": ">=1.25.2"
+      "@modelcontextprotocol/sdk@<1.25.2": ">=1.25.2",
+      "minimatch@>=10.0.0 <10.2.3": ">=10.2.3"
     }
   }
 }

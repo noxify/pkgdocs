@@ -63,6 +63,9 @@ jobs:
       - name: Setup
         uses: ./.github/setup
 
+      - name: Build packages
+        run: pnpm build:pkg
+
       - name: Generate next types
         run: pnpm -F @pkgdocs/site typegen
 
