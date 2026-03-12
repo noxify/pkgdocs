@@ -48,21 +48,21 @@
     "@pkgdocs/eslint-config": "workspace:*",
     "@pkgdocs/prettier-config": "workspace:*",
     "@pkgdocs/tsconfig": "workspace:*",
-    "@types/node": "24.10.4",
-    "@vitejs/plugin-react": "^5.1.2",
+    "@types/node": "24.12.0",
+    "@vitejs/plugin-react": "^5.1.4",
     "dedent": "1.7.2",
-    "eslint": "9.39.2",
+    "eslint": "9.39.4",
     "memfs": "^4.56.11",
     "react": "19.2.4",
     "renoun": "11.4.0",
-    "tsdown": "0.21.1",
+    "tsdown": "0.21.2",
     "typescript": "5.9.3",
     "vitest": "4.0.18",
     "zod": "^4.3.6"
   },
   "peerDependencies": {
-    "react": "^19.2",
-    "renoun": "11.0.0",
-    "zod": "^4"
+    "react": "^19.2.4",
+    "renoun": "11.4.0",
+    "zod": "^4.3.6"
   }
 }

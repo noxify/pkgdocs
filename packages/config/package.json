@@ -51,11 +51,11 @@
     "@pkgdocs/prettier-config": "workspace:*",
     "@pkgdocs/tsconfig": "workspace:*",
     "@pkgdocs/ui": "workspace:*",
-    "@types/node": "24.10.4",
+    "@types/node": "24.12.0",
     "better-themes": "1.1.0",
-    "eslint": "9.39.2",
+    "eslint": "9.39.4",
     "renoun": "11.4.0",
-    "tsdown": "0.21.1",
+    "tsdown": "0.21.2",
     "typescript": "5.9.3"
   },
   "publishConfig": {

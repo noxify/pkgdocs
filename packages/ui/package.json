@@ -70,17 +70,17 @@
     "better-themes": "1.1.0"
   },
   "peerDependencies": {
-    "react": ">=19.0.0",
-    "react-dom": ">=19.0.0"
+    "react": ">=19.2.4",
+    "react-dom": ">=19.2.4"
   },
   "devDependencies": {
     "@pkgdocs/eslint-config": "workspace:*",
     "@pkgdocs/prettier-config": "workspace:*",
     "@pkgdocs/tsconfig": "workspace:*",
-    "eslint": "9.39.2",
+    "eslint": "9.39.4",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "tsdown": "0.21.1",
+    "tsdown": "0.21.2",
     "typescript": "5.9.3"
   },
   "publishConfig": {
