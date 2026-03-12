@@ -43,8 +43,8 @@
   },
   "prettier": "@pkgdocs/prettier-config",
   "peerDependencies": {
-    "better-themes": "1.1.0",
-    "renoun": "11.1.0"
+    "better-themes": ">=1.1.0 <2",
+    "renoun": "11.4.0"
   },
   "devDependencies": {
     "@pkgdocs/eslint-config": "workspace:*",

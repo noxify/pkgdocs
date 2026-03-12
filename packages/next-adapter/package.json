@@ -72,9 +72,9 @@
     "vitest": "4.0.18"
   },
   "peerDependencies": {
-    "@next/mdx": "16.1.6",
+    "@next/mdx": ">=16.1.6 <17",
     "@renoun/mdx": "3.8.1",
-    "next": "16.1.6",
+    "next": ">=16.1.6 <17",
     "renoun": "11.4.0"
   }
 }

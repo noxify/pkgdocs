@@ -177,6 +177,18 @@ describe("myFunction", () => {
 })
 ```
 
+### Peer Dependency Versioning
+
+To keep compatibility predictable across packages, use a consistent policy for `peerDependencies`:
+
+- **Feature-gated framework peers** (e.g. Next.js): use a minimum version plus major cap, e.g. `>=16.1.6 <17`
+- **Stable peers** (e.g. React, Zod): use bounded ranges, e.g. `>=19.2.4 <20`
+- **Semver-unstable peers** (known breaking changes without major bumps): pin narrowly (exact or patch), e.g. `renoun: 11.4.0` 🙈
+- **Avoid unbounded ranges** like `>=x.y.z` in peers
+- **Keep devDependencies pinned** to concrete versions used by CI and local testing
+
+When introducing new framework features, raise the minimum peer version in the same PR and note the reason in the changelog/PR description.
+
 ## Getting Help
 
 If you need any assistance or have questions about contributing:
