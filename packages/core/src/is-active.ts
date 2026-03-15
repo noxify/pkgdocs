@@ -9,7 +9,7 @@ function normalizePath(path: string): string {
 }
 
 function toArray(input: PathInput): readonly string[] {
-  return Array.isArray(input) ? input : [input]
+  return (Array.isArray(input) ? input : [input]) as readonly string[]
 }
 
 function escapeRegex(value: string): string {
