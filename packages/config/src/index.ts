@@ -9,12 +9,13 @@ import { DocConfigFileSchema } from "./types"
 async function runtimeImport(
   modulePath: string,
 ): Promise<{ default?: unknown } & Record<string, unknown>> {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-  return import(
-    /* webpackIgnore: true */
-    /* @vite-ignore */
-    modulePath
-  )
+  // Create the importer at runtime so bundlers do not try to resolve dynamic file paths.
+  // eslint-disable-next-line @typescript-eslint/no-implied-eval
+  const dynamicImport = new Function("specifier", "return import(specifier)") as (
+    specifier: string,
+  ) => Promise<{ default?: unknown } & Record<string, unknown>>
+
+  return dynamicImport(modulePath)
 }
 
 export function validateDocConfig(config: unknown): DocConfigFile {
