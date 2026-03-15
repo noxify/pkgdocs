@@ -49,16 +49,17 @@
     "@pkgdocs/prettier-config": "workspace:*",
     "@pkgdocs/tsconfig": "workspace:*",
     "@types/node": "24.12.0",
-    "@vitejs/plugin-react": "^5.1.4",
+    "@vitejs/plugin-react": "6.0.1",
     "dedent": "1.7.2",
     "eslint": "9.39.4",
-    "memfs": "^4.56.11",
+    "jsdom": "29.0.0",
+    "memfs": "4.56.11",
     "react": "19.2.4",
-    "renoun": "11.4.0",
+    "renoun": "11.5.0",
     "tsdown": "0.21.2",
     "typescript": "5.9.3",
-    "vitest": "4.0.18",
-    "zod": "^4.3.6"
+    "vitest": "4.1.0",
+    "zod": "4.3.6"
   },
   "peerDependencies": {
     "react": ">=19.2.4 <20",

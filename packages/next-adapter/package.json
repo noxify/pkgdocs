@@ -61,15 +61,15 @@
     "@pkgdocs/eslint-config": "workspace:*",
     "@pkgdocs/prettier-config": "workspace:*",
     "@pkgdocs/tsconfig": "workspace:*",
-    "@renoun/mdx": "3.8.1",
+    "@renoun/mdx": "3.8.2",
     "@types/node": "24.12.0",
     "eslint": "9.39.4",
     "next": "16.1.6",
     "react": "19.2.4",
-    "renoun": "11.4.0",
+    "renoun": "11.5.0",
     "tsdown": "0.21.2",
     "typescript": "5.9.3",
-    "vitest": "4.0.18"
+    "vitest": "4.1.0"
   },
   "peerDependencies": {
     "@next/mdx": ">=16.1.6 <17",
