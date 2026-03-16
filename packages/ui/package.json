@@ -80,7 +80,7 @@
     "eslint": "9.39.4",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "tsdown": "0.21.2",
+    "tsdown": "0.21.4",
     "typescript": "5.9.3"
   },
   "publishConfig": {
