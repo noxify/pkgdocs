@@ -9,7 +9,7 @@ import {
 
 import docConfig from "../../pkgdocs.config.mjs"
 
-const configAdapterOptions = nextAdapterOptionsFromFrameworkConfig(docConfig.framework?.next)
+const configAdapterOptions = nextAdapterOptionsFromFrameworkConfig(docConfig.framework)
 
 export function resolveNextAdapterOptions(overrides: NextAdapterOptions = {}): NextAdapterOptions {
   return {
@@ -28,9 +28,7 @@ export function getNextFrameworkAdapter(overrides: NextAdapterOptions = {}) {
 export const nextFrameworkAdapter = getNextFrameworkAdapter()
 
 export function getNextMdxComponents(overrides: NextAdapterOptions = {}): MDXComponents {
-  return createNextMdxComponents({
-    next: resolveNextAdapterOptions(overrides),
-  })
+  return createNextMdxComponents(resolveNextAdapterOptions(overrides))
 }
 
 export const nextMdxComponents: MDXComponents = getNextMdxComponents()

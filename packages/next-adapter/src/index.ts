@@ -21,10 +21,6 @@ export interface NextFrameworkConfig {
   useOptimizedImage?: boolean
 }
 
-export interface CreateNextMdxOptions extends CreateMdxOptions {
-  next?: NextAdapterOptions
-}
-
 export function nextAdapterOptionsFromFrameworkConfig(
   config?: NextFrameworkConfig,
 ): NextAdapterOptions {
@@ -46,8 +42,8 @@ function mergeUnique<TItem>(base: readonly TItem[] = [], extra: readonly TItem[]
   return result
 }
 
-export function createNextMdxComponents(opts: CreateNextMdxOptions = {}): MDXComponents {
-  const adapter = createNextFrameworkAdapter(opts.next)
+export function createNextMdxComponents(opts: NextFrameworkConfig = {}): MDXComponents {
+  const adapter = createNextFrameworkAdapter(opts)
   const createMdxComponentsSafe = createMdxComponents as (
     options: CreateMdxOptions,
   ) => MDXComponents

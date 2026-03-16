@@ -1,7 +1,12 @@
-import type { LayoutProps } from "../../types"
+"use client"
 
-export function MinimalLayout({ children, config }: LayoutProps) {
-  const hasOptimizedImage = config.framework?.hasOptimizedImage ?? false
+import type { LayoutProps } from "../../types"
+import { useFrameworkAdapter } from "../../framework"
+
+export function MinimalLayout({ children }: LayoutProps) {
+  const { capabilities } = useFrameworkAdapter()
+  const hasOptimizedImage = capabilities?.hasOptimizedImage ?? false
+
   const maxWidth = hasOptimizedImage ? "72ch" : "68ch"
 
   return (

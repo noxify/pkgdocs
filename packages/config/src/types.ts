@@ -18,12 +18,8 @@ type RemoveIndexSignature<T> = {
 type RenounConfig = Simplify<Omit<RemoveIndexSignature<RootProviderProps>, "children">>
 
 export const FrameworkConfigSchema = v.object({
-  next: v.optional(
-    v.object({
-      prefetch: v.optional(v.boolean()),
-      useOptimizedImage: v.optional(v.boolean()),
-    }),
-  ),
+  prefetch: v.optional(v.boolean()),
+  useOptimizedImage: v.optional(v.boolean()),
 })
 
 export const DocConfigFileSchema = v.object({

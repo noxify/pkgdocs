@@ -21,7 +21,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <RootProvider {...docConfig.renoun}>
       <html lang="en" suppressHydrationWarning>
         <body>
-          <FrameworkProviderWrapper>
+          <FrameworkProviderWrapper frameworkOptions={docConfig.framework}>
             <ThemeProviderWrapper
               config={{
                 layoutKey: docConfig.layout ?? uiConfig.layoutKey ?? "classic",

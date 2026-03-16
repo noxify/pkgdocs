@@ -1,10 +1,14 @@
+"use client"
+
 import type { LayoutProps } from "../../types"
+import { useFrameworkAdapter } from "../../framework"
 
 export function ClassicLayout({ children, config }: LayoutProps) {
   const sidebar = config.options?.sidebar ?? "left"
   const contentWidth = config.options?.contentWidth ?? "72ch"
-  const supportsPrefetch = config.framework?.supportsPrefetch ?? false
-  const hasOptimizedImage = config.framework?.hasOptimizedImage ?? false
+  const { capabilities } = useFrameworkAdapter()
+  const supportsPrefetch = capabilities?.supportsPrefetch ?? false
+  const hasOptimizedImage = capabilities?.hasOptimizedImage ?? false
 
   return (
     <div
