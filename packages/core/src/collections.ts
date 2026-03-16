@@ -265,6 +265,7 @@ export async function getEntry(
     relativePathname: source.getPathname({ includeBasePathname: false }),
     segments: source.getPathnameSegments({ includeBasePathname: true }),
     title: metadata ? getTitle(source, metadata, true) : getTitle(source, undefined, true),
+    description: metadata?.description ?? undefined,
     path: source.absolutePath,
     isDirectory: isDirectory(source),
     sortOrder: (file?.order ?? 0) as number,

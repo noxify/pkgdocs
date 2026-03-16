@@ -28,6 +28,8 @@ export interface TransformedEntry {
   segments: string[]
   /** Display title resolved from frontmatter or entry name */
   title: string
+  /** Description resolved from frontmatter or entry content */
+  description?: string
   /** Absolute file system path */
   path: string
   /** Whether this entry is a directory */

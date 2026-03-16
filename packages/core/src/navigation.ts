@@ -4,8 +4,10 @@ import { isHidden } from "./helpers"
 
 export interface TreeItem {
   title: string
+  description?: string
   path: string
   isFile: boolean
+  hasFile: boolean
   slug: string[]
   depth: number
   externalLink?: string
@@ -37,9 +39,11 @@ export function buildTree(entries: readonly TransformedEntry[]): TreeItem[] {
       title: entry.title,
       path: entry.fullPathname,
       isFile: entry.isDirectory === false,
+      hasFile: entry.hasFile,
       slug: entry.segments,
       depth: entry.depth,
       externalLink: undefined,
+      description: entry.description,
       sortOrder: entry.sortOrder,
       children: [],
     }
