@@ -8,6 +8,7 @@ function createTreeItem(overrides: Partial<TreeItem>): TreeItem {
     title: "Item",
     path: "/api/reference",
     isFile: false,
+    hasFile: true,
     slug: ["api", "reference"],
     depth: 2,
     children: [],
