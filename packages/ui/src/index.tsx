@@ -1,5 +1,4 @@
 export type {
-  DocConfig,
   FrameworkAdapter,
   FrameworkCapabilities,
   FrameworkComponents,
@@ -7,6 +6,7 @@ export type {
   FrameworkLinkProps,
   LayoutProps,
 } from "./types"
+export type { DocConfigFile } from "@pkgdocs/config"
 export type { ThemeProviderProps } from "./theme/ThemeProvider"
 export { resolveLayout, layoutRegistry } from "./registry/layouts"
 export { ClassicLayout } from "./layouts/classic"

@@ -1,10 +1,11 @@
 import type { FC, PropsWithChildren } from "react"
 
-import type { DocConfig } from "../types"
+import type { DocConfigFile } from "@pkgdocs/config"
+
 import { ClassicLayout } from "../layouts/classic"
 import { MinimalLayout } from "../layouts/minimal"
 
-type LayoutComp = FC<PropsWithChildren<{ config: DocConfig }>>
+type LayoutComp = FC<PropsWithChildren<{ config: DocConfigFile }>>
 
 export const layoutRegistry: Record<string, LayoutComp> = {
   classic: ClassicLayout,

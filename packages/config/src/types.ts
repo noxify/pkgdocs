@@ -2,8 +2,6 @@ import type { ThemeProviderProps as BetterThemesProps } from "better-themes/rsc"
 import type { RootProviderProps } from "renoun/components"
 import * as v from "valibot"
 
-import type { DocConfig } from "@pkgdocs/ui"
-
 type Simplify<T> = { [K in keyof T]: T[K] } & {}
 type RemoveIndexSignature<T> = {
   [K in keyof T as string extends K
@@ -22,14 +20,24 @@ export const FrameworkConfigSchema = v.object({
   useOptimizedImage: v.optional(v.boolean()),
 })
 
+export const PkgDocsConfigSchema = v.object({
+  layout: v.string(),
+  features: v.optional(
+    v.object({
+      toc: v.optional(v.boolean()),
+      search: v.optional(v.union([v.literal(false), v.literal("orama-local")]), "orama-local"),
+      breadcrumbs: v.optional(v.boolean()),
+    }),
+  ),
+})
+
 export const DocConfigFileSchema = v.object({
-  layout: v.optional(v.string()),
-  defaultTheme: v.optional(v.picklist(["light", "dark", "system"])),
   framework: v.optional(FrameworkConfigSchema),
-  ui: v.optional(v.custom<Partial<DocConfig>>(() => true)),
-  betterThemes: v.optional(v.custom<Partial<BetterThemesProps>>(() => true)),
+  pkgdocs: v.optional(PkgDocsConfigSchema),
+  betterThemes: v.optional(v.custom<Partial<Omit<BetterThemesProps, "children">>>(() => true)),
   renoun: v.optional(v.custom<RenounConfig>(() => true)),
 })
 
+export type PkgDocsConfig = v.InferOutput<typeof PkgDocsConfigSchema>
 export type FrameworkConfig = v.InferOutput<typeof FrameworkConfigSchema>
 export type DocConfigFile = v.InferOutput<typeof DocConfigFileSchema>

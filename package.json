@@ -44,7 +44,7 @@
     "@vitest/ui": "4.1.0",
     "prettier": "3.8.1",
     "sherif": "1.10.0",
-    "turbo": "2.8.17",
+    "turbo": "2.8.20",
     "typescript": "5.9.3",
     "vitest": "4.1.0"
   },

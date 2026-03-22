@@ -5,13 +5,14 @@ import type { PropsWithChildren } from "react"
 import { useMemo } from "react"
 import { ThemeProvider as BetterThemesProvider } from "better-themes/rsc"
 
-import type { DocConfig } from "../types"
+import type { DocConfigFile } from "@pkgdocs/config"
+
 import { useFrameworkAdapter } from "../framework"
 import { resolveLayout } from "../registry/layouts"
 import { toCssVars } from "./tokens"
 
 export interface ThemeProviderProps extends PropsWithChildren {
-  config: DocConfig
+  config: DocConfigFile
   theme?: BetterThemesProps
 }
 
