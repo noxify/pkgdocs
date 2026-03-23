@@ -5,7 +5,7 @@ export default defineConfig({
     index: "src/index.tsx",
     framework: "src/framework/client.tsx",
     mdx: "src/mdx/index.tsx",
-    "layouts/classic": "src/layouts/classic/index.tsx",
+    "layouts/pkgdocs": "src/layouts/pkgdocs/index.tsx",
     "layouts/minimal": "src/layouts/minimal/index.tsx",
     theme: "src/theme/client.ts",
   },

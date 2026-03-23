@@ -1,28 +1,28 @@
 "use client"
 
-import type { ThemeProviderProps as BetterThemesProps } from "better-themes/rsc"
 import type { PropsWithChildren } from "react"
 import { useMemo } from "react"
 import { ThemeProvider as BetterThemesProvider } from "better-themes/rsc"
 
-import type { DocConfigFile } from "@pkgdocs/config"
+import type { DocConfig } from "@pkgdocs/config"
 
 import { useFrameworkAdapter } from "../framework"
 import { resolveLayout } from "../registry/layouts"
-import { toCssVars } from "./tokens"
 
 export interface ThemeProviderProps extends PropsWithChildren {
-  config: DocConfigFile
-  theme?: BetterThemesProps
+  config: DocConfig
 }
 
-export function ThemeProvider({ config, theme, children }: ThemeProviderProps) {
+export function ThemeProvider({ config, children }: ThemeProviderProps) {
   const framework = useFrameworkAdapter()
-  const style = useMemo(() => toCssVars(config.theme), [config.theme])
-  const Layout = useMemo(() => resolveLayout(config.layoutKey), [config.layoutKey])
+  const Layout = useMemo(
+    () => resolveLayout(config.pkgdocs?.layout ?? "pkgdocs"),
+    [config.pkgdocs?.layout],
+  )
   const resolvedConfig = useMemo<DocConfig>(
     () => ({
       ...config,
+      pkgdocs: config.pkgdocs ?? { layout: "pkgdocs" },
       framework: {
         ...framework.capabilities,
         ...config.framework,
@@ -32,10 +32,14 @@ export function ThemeProvider({ config, theme, children }: ThemeProviderProps) {
   )
 
   const content = (
-    <div style={style}>
+    <div>
       <Layout config={resolvedConfig}>{children}</Layout>
     </div>
   )
 
-  return theme ? <BetterThemesProvider {...theme}>{content}</BetterThemesProvider> : content
+  return resolvedConfig.betterThemes !== false ? (
+    <BetterThemesProvider {...(resolvedConfig.betterThemes ?? {})}>{content}</BetterThemesProvider>
+  ) : (
+    content
+  )
 }

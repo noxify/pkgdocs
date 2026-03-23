@@ -21,7 +21,6 @@ const nextConfig: NextConfig = {
   },
 
   experimental: {
-    isolatedDevBuild: true,
     /**
      * In case you have a lot of pages and experience failing builds,
      * you can enable these experimental feature to reduce the amount of used CPUs

@@ -1,6 +1,6 @@
 import type { ComponentProps, PropsWithChildren, ReactNode } from "react"
 
-import type { DocConfigFile } from "@pkgdocs/config"
+import type { DocConfig } from "@pkgdocs/config"
 
 export type FrameworkLinkProps = ComponentProps<"a"> & {
   prefetch?: boolean
@@ -22,4 +22,4 @@ export interface FrameworkAdapter {
   capabilities?: FrameworkCapabilities
 }
 
-export type LayoutProps = PropsWithChildren<{ config: DocConfigFile }>
+export type LayoutProps = PropsWithChildren<{ config: DocConfig }>

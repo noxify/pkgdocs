@@ -29,15 +29,15 @@
       "import": "./dist/framework.mjs",
       "default": "./dist/framework.mjs"
     },
-    "./layouts/classic": {
-      "types": "./dist/layouts/classic.d.mts",
-      "import": "./dist/layouts/classic.mjs",
-      "default": "./dist/layouts/classic.mjs"
-    },
     "./layouts/minimal": {
       "types": "./dist/layouts/minimal.d.mts",
       "import": "./dist/layouts/minimal.mjs",
       "default": "./dist/layouts/minimal.mjs"
+    },
+    "./layouts/pkgdocs": {
+      "types": "./dist/layouts/pkgdocs.d.mts",
+      "import": "./dist/layouts/pkgdocs.mjs",
+      "default": "./dist/layouts/pkgdocs.mjs"
     },
     "./mdx": {
       "types": "./dist/mdx.d.mts",
@@ -67,7 +67,8 @@
   },
   "prettier": "@pkgdocs/prettier-config",
   "dependencies": {
-    "better-themes": "1.1.0"
+    "better-themes": "1.1.0",
+    "zustand": "5.0.12"
   },
   "peerDependencies": {
     "react": ">=19.2.4 <20",

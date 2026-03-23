@@ -9,7 +9,6 @@ import { ThemeProviderWrapper } from "~/components/ThemeProviderWrapper"
 import "~/styles/globals.css"
 
 const docConfig = await loadDocConfig()
-const uiConfig = docConfig.ui ?? {}
 
 export const metadata: Metadata = {
   title: "pkgdocs",
@@ -22,22 +21,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <html lang="en" suppressHydrationWarning>
         <body>
           <FrameworkProviderWrapper frameworkOptions={docConfig.framework}>
-            <ThemeProviderWrapper
-              config={{
-                layoutKey: docConfig.layout ?? uiConfig.layoutKey ?? "classic",
-                options: uiConfig.options,
-                theme: uiConfig.theme,
-                features: uiConfig.features,
-              }}
-              theme={{
-                attribute: "class",
-                defaultTheme: docConfig.defaultTheme ?? "system",
-                enableSystem: true,
-                ...docConfig.betterThemes,
-              }}
-            >
-              {children}
-            </ThemeProviderWrapper>
+            <ThemeProviderWrapper config={docConfig}>{children}</ThemeProviderWrapper>
           </FrameworkProviderWrapper>
         </body>
       </html>

@@ -9,7 +9,7 @@ pnpm -F @pkgdocs/ui build
 Exports:
 
 - @pkgdocs/ui
-- @pkgdocs/ui/layouts/classic
+- @pkgdocs/ui/layouts/pkgdocs
 - @pkgdocs/ui/layouts/minimal
 - @pkgdocs/ui/mdx
 

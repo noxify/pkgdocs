@@ -3,8 +3,8 @@ import { resolve } from "path"
 import { pathToFileURL } from "url"
 import * as v from "valibot"
 
-import type { DocConfigFile } from "./types"
-import { DocConfigFileSchema } from "./types"
+import type { DocConfig } from "./types"
+import { DocConfigSchema } from "./types"
 
 async function runtimeImport(
   modulePath: string,
@@ -18,14 +18,14 @@ async function runtimeImport(
   return dynamicImport(modulePath)
 }
 
-export function validateDocConfig(config: unknown): DocConfigFile {
-  return v.parse(DocConfigFileSchema, config)
+export function validateDocConfig(config: unknown): DocConfig {
+  return v.parse(DocConfigSchema, config)
 }
 
 /**
  * Helper function for type-safe config definition
  */
-export function defineConfig(config: DocConfigFile): DocConfigFile {
+export function defineConfig(config: DocConfig): DocConfig {
   return config
 }
 
@@ -34,7 +34,7 @@ export function defineConfig(config: DocConfigFile): DocConfigFile {
  * @param configPath - Path to the config file (defaults to process.cwd()/pkgdocs.config.mjs or pkgdocs.config.js or pkgdocs.config.json)
  * @returns The parsed configuration object
  */
-export async function loadDocConfig(configPath?: string): Promise<DocConfigFile> {
+export async function loadDocConfig(configPath?: string): Promise<DocConfig> {
   const basePath = configPath ? resolve(configPath) : resolve(process.cwd())
   const mjsConfigPath = resolve(basePath, "pkgdocs.config.mjs")
   const jsConfigPath = resolve(basePath, "pkgdocs.config.js")
@@ -82,4 +82,4 @@ export async function loadDocConfig(configPath?: string): Promise<DocConfigFile>
   }
 }
 
-export type { DocConfigFile, FrameworkConfig } from "./types"
+export type { DocConfig, FrameworkConfig } from "./types"

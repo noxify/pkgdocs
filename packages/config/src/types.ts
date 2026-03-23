@@ -31,13 +31,15 @@ export const PkgDocsConfigSchema = v.object({
   ),
 })
 
-export const DocConfigFileSchema = v.object({
+export const DocConfigSchema = v.object({
   framework: v.optional(FrameworkConfigSchema),
   pkgdocs: v.optional(PkgDocsConfigSchema),
-  betterThemes: v.optional(v.custom<Partial<Omit<BetterThemesProps, "children">>>(() => true)),
+  betterThemes: v.optional(
+    v.union([v.custom<Partial<Omit<BetterThemesProps, "children">>>(() => true), v.literal(false)]),
+  ),
   renoun: v.optional(v.custom<RenounConfig>(() => true)),
 })
 
 export type PkgDocsConfig = v.InferOutput<typeof PkgDocsConfigSchema>
 export type FrameworkConfig = v.InferOutput<typeof FrameworkConfigSchema>
-export type DocConfigFile = v.InferOutput<typeof DocConfigFileSchema>
+export type DocConfig = v.InferOutput<typeof DocConfigSchema>
